@@ -82,6 +82,14 @@ return [
 
     'locale' => 'en',
 
+
+
+    'locales' => [
+        'en',
+        'ru',
+        'az',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application Fallback Locale
@@ -161,7 +169,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        \Astrotomic\Translatable\TranslatableServiceProvider::class,
         /*
          * Package Service Providers...
          */
