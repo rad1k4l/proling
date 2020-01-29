@@ -6,11 +6,11 @@
  */
 
 use Illuminate\Support\Facades\Route;
-use \Illuminate\Http\Request;
 
 
-Route::group(['prefix' => "{main_lang?}", 'where' => [
-], "middleware" => 'language' ], function ($locale){
+Route::group([
+    'prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale()
+], function () {
 
     Route::get('/', ['as' => 'homepage', 'uses' => 'WebController@index']);
 
@@ -33,31 +33,15 @@ Route::group(['prefix' => "{main_lang?}", 'where' => [
     Route::get('/video', ['as' => 'video', 'uses' => 'VideoPageController@index']);
 
     Route::get('/privacy-policy', ['as' => 'privacy-policy', 'uses' => 'PrivacyPolicyController@index']);
+    Route::get('/test', function () {
+        DB::listen(function ($query){
+            dump($query->sql);
+        });
 
-    Route::get("/translate/test", function (){
-//    $model = new \App\Models\Service();
-//
-//
-//    foreach ( config('app.locales') as $lang)
-//    {
-//        $model->translateOrNew($lang)->title = "{$lang} Title";
-//
-//        $model->translateOrNew($lang)->header = "{$lang} Header";
-//        $model->translateOrNew($lang)->text = "{$lang} Text";
-//    }
-//
-//    $model->sort = 0;
-//
-//    $model->save();
-        dump(app()->getLocale());
-        $services = \App\Models\Service::all();
+        $categories = \App\Models\Category::first();
+        dump($categories->name);
+    });
 
-        foreach ($services as $service) {
-            echo "{$service->header}<br>";
-        }
-
-
-    })->name('translate');
 });
 
 

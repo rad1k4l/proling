@@ -10,5 +10,4 @@ class Service extends Model
     public $timestamps = false;
     protected $table = "service_translations";
 
-
 }

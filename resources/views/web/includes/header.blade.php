@@ -12,24 +12,27 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent-7">
 			<ul class="navbar-nav">
-				<li class="nav-item pl-1">
-					<a class="nav-link" href="{{ route('homepage') }}">Home</a>
-				</li>
-				<li class="nav-item pl-1">
-					<a class="nav-link" href="{{ route('about') }}">About</a>
-				</li>
-				<li class="nav-item pl-1">
-					<a class="nav-link" href="{{ route('service') }}">Services</a>
-				</li>
-				<li class="nav-item pl-1">
-					<a class="nav-link" href="{{ route('language') }}">Languages</a>
-				</li>
-				<li class="nav-item pl-1">
-					<a class="nav-link" href="{{ route('price') }}">Prices</a>
-				</li>
-				<li class="nav-item pl-1">
-					<a class="nav-link" href="{{ route('contact')}}">Contact</a>
-				</li>
+
+                @foreach($categories as $category)
+                    <li class="nav-item pl-1">
+                        <a class="nav-link" href="{{ route('homepage') }}">Home</a>
+                    </li>
+                    <li class="nav-item pl-1">
+                        <a class="nav-link" href="{{ route('about') }}">About</a>
+                    </li>
+                    <li class="nav-item pl-1">
+                        <a class="nav-link" href="{{ route('service') }}">Services</a>
+                    </li>
+                    <li class="nav-item pl-1">
+                        <a class="nav-link" href="{{ route('language') }}">Languages</a>
+                    </li>
+                    <li class="nav-item pl-1">
+                        <a class="nav-link" href="{{ route('price') }}">Prices</a>
+                    </li>
+                    <li class="nav-item pl-1">
+                        <a class="nav-link" href="{{ route('contact')}}">Contact</a>
+                    </li>
+                @endforeach
 			</ul>
 
 			<div class="ml-auto text-center">
@@ -188,13 +191,13 @@
         // passes on every "a" tag
         $(".navbar-nav a").each(function() {
             // checks if its the same on the address bar
-            if (url == (this.href)) {
+            if (url === (this.href)) {
             	$(this).closest("li").addClass("active");
                 //for making parent of submenu active
                 $(this).closest("li").parent().parent().addClass("active");
             }
         });
-    });       
+    });
 </script>
 
 @endsection

@@ -36,7 +36,7 @@ return [
     | and never fallback to the translator one.
     |
     */
-    'locale' => config('app.fallback_locale'),
+    'locale' => null,
 
     /*
     |--------------------------------------------------------------------------

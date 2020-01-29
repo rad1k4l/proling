@@ -1,27 +1,31 @@
 <?php
 
-namespace App\Models\Panel;
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
-class Category extends Model implements TranslatableContract
+use Illuminate\Database\Eloquent\Scope;
+
+class Category extends OptimizeModel implements TranslatableContract
 {
     use Translatable;
 
-    public $translationModel = "App\Models\Translations\Panel\Category";
+    public $translationModel = "App\Models\Translations\Category";
 
     public $timestamps = false;
 
     public $translatedAttributes = ['name'];
 
-    protected $table = "categories";
-//    public $localeKey = '';
+    protected static $columns = [ ];
 
+    protected $table = "categories";
 
     public static function root(){
         return self::where("parent" , "=" , 0)->orderBy("sort" , "asc")->get();
     }
-
+    
     public function childs(){
 
         $childs = $this->where("parent" , "=", $this->id)->get();
@@ -32,4 +36,5 @@ class Category extends Model implements TranslatableContract
         }
         else return $childs;
     }
+
 }
