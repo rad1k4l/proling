@@ -67,21 +67,28 @@
 
     @include("clibs.input-modal")
     <script>
+        function checkResponse(response){
+            return response.status === 200 &&response.data.status.toLowerCase() === 'ok';
+        }
+
         let categories = new Vue({
             el : ".categories",
             data : {
                 state : null,
                 modalTemplate: {
                    @foreach(config("app.locales") as $code => $name )
-                       {{ "category_".$code . ":"  }}
-
+                       {{ "category_".$name . ":"  }}
                        {{ "{" }}
                             data : "",
-                            label : "{{ $name }}",
+                            label : "Category " + "{{ $name }}".toUpperCase(),
                             type : "text"
                        {{  "}," }}
                    @endforeach
-
+                    route : {
+                        data : "",
+                           label : "Category Route",
+                           type : 'text'
+                    }
                 }
             },
             methods : {
@@ -103,40 +110,55 @@
                 },
                 add: function () {
                     modal.open(this.modalTemplate, function (submitted) {
-                        axios.post("{{ route("panel.category.create") }}", {  submitted  })
-                            .then(response => {
-                            if(response.status === 200){
-                                if (response.data.status === "OK") {
-                                    window.location.reload();
-                                }
-                            }
-                        }).catch();
+                        return new Promise(resolve => {
+                            axios.post("{{ route("panel.category.create") }}", {  submitted  })
+                                .then(response => {
+                                    if(checkResponse(response)){
+                                        window.location.reload();
+                                    }else {
+                                        if(response.data.info !== undefined) {
+                                            resolve(response.data.info);
+                                        }else {
+                                            resolve("Validation error");
+                                        }
+                                    }
+                                }).catch(error => {
+                                    resolve(error.message);
+                                });
+                        });
                     });
                 },
                 edit: function (id) {
                     axios.post("{{ route("panel.category.get") }}", { id : id}).then(response => {
                         let that = this;
-                        if(response.status === 200){
-                            if (response.data.status === "OK") {
-                                let data = response.data.data ;
-                                let template = JSON.parse(JSON.stringify(that.modalTemplate));
-                                data.translations.forEach(function (value) {
-                                    template["category_" + value.locale].data = value.name;
-                                });
-                                modal.open(template, function (submitted) {
+
+                        if (checkResponse(response)) {
+                            let data = response.data.data ;
+                            let template = JSON.parse(JSON.stringify(that.modalTemplate));
+                            data.translations.forEach(function (value) {
+                                template["category_" + value.locale].data = value.name;
+                            });
+                            template.route.data = data.route;
+                            template._title = "Category Edit";
+                            modal.open(template, function (submitted) {
+                                return new Promise(resolve => {
                                     axios.post("{{ route("panel.category.update") }}",{
                                         id : id ,
                                         submitted
                                     }).then(response => {
-                                        if(response.status === 200){
-                                            if (response.data.status === "OK") {
-                                                window.location.reload();
-                                            }
+                                        if(checkResponse(response)){
+                                            window.location.reload();
+                                            return true;
+                                        }else {
+                                            resolve(response.data.info);
                                         }
-                                    }).catch()
+                                    }).catch(error => {
+                                       resolve(error.message);
+                                    });
                                 });
-                            }
+                            });
                         }
+
                     }).catch();
                 },
                 del : function  (id) {
