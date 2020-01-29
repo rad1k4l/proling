@@ -3,7 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Category;
-use App\Models\Panel\Routes;
+use App\Models\Routes;
 use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\View;
@@ -18,10 +18,16 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         ViewFacade::composer(['web.layouts.app'], function(View $view){
-            $menus = Category::all();
+            $categories = Category::all();
+            $view->with(compact("categories"));
+        });
 
+        ViewFacade::composer(['panel.template.sidenav'], function(View $view){
+            $menus = Routes::menu();
             $view->with(compact("menus"));
         });
+
+
     }
 
     /**

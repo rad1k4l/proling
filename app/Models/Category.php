@@ -25,7 +25,7 @@ class Category extends OptimizeModel implements TranslatableContract
     public static function root(){
         return self::where("parent" , "=" , 0)->orderBy("sort" , "asc")->get();
     }
-    
+
     public function childs(){
 
         $childs = $this->where("parent" , "=", $this->id)->get();

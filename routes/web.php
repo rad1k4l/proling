@@ -7,12 +7,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+Route::group([ 'prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale() ], function () {
 
-Route::group([
-    'prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale()
-], function () {
-
-    Route::get('/', ['as' => 'homepage', 'uses' => 'WebController@index']);
+    Route::get('/', ['as' => 'homepage', 'uses' => 'HomeController@index']);
 
     Route::get('/online-order', ['as' => 'online-order', 'uses' => 'OnlineOrderController@index']);
 
@@ -33,19 +30,89 @@ Route::group([
     Route::get('/video', ['as' => 'video', 'uses' => 'VideoPageController@index']);
 
     Route::get('/privacy-policy', ['as' => 'privacy-policy', 'uses' => 'PrivacyPolicyController@index']);
-    Route::get('/test', function () {
-        DB::listen(function ($query){
-            dump($query->sql);
-        });
-
-        $categories = \App\Models\Category::first();
-        dump($categories->name);
-    });
 
 });
 
+// admin permissions
+Route::group([ /*'middleware' => "permissions",*/ 'namespace' => 'Panel' , 'prefix' => 'panel'], function () {
+
+    //  Users
+    Route::group(['prefix' => 'user', 'as' => 'panel.user.'], function(){
+        Route::get('list/index', "UserController@listIndex")->name("list.index");
+        Route::post('list/get', "UserController@userList")->name("list.get");
+    });
+
+    // ./users
+
+    // cache
+    Route::get('/clear-cache', function() {
+        Artisan::call('cache:clear');
+        Artisan::call('route:clear');
+
+        Artisan::call('config:clear');
+        Artisan::call('view:clear');
+        return redirect()->back()->with('message', "Cache silindi");
+    })->name('cache.clear');
+    // ./cache
+
+    // category route
+    Route::group(["prefix" => "category"], function () {
+        Route::get("/", "CategoryController@index")->name("panel.category.index");
+        Route::post("create", "CategoryController@create")->name("panel.category.create");
+        Route::post("update", "CategoryController@update")->name("panel.category.update");
+        Route::post("delete", "CategoryController@delete")->name("panel.category.delete");
+        Route::post("update/state", "CategoryController@updateState")->name("panel.category.state");
+        Route::post("get", "CategoryController@get")->name("panel.category.get");
+    });
+    //./category end
+
+    // currency route
+    Route::group(["prefix" => "currency"], function () {
+        Route::get("index", "CurrencyController@index")
+            ->name("panel.currency.index");
+        Route::post("get", "CurrencyController@getCurrencies")
+            ->name("panel.currency.get_all");
+        Route::post("create", "CurrencyController@add")
+            ->name("panel.currency.create");
+        Route::post("update", "CurrencyController@update")
+            ->name("panel.currency.update");
+
+        Route::post("delete", "CurrencyController@delete")
+            ->name("panel.currency.delete");
+    });
+    //        currency end
+
+    Route::group(['prefix' => "routes11"], function () {
+        Route::get('/', "RoutesController@index")->name("panel.routes");
+        Route::get('/get/{id}', "RoutesController@edit")->name("panel.routes.edit.form")
+            ->where('id', '[0-9]+');
+        Route::post('/new', "RoutesController@save")->name("panel.routes.save");
+        Route::post('/update/{id}', "RoutesController@update")->name("panel.routes.update");
+    });
 
 
+    // category route
+    Route::group(["prefix" => "route"], function () {
+        Route::get('index', "RouteController@index")->name("panel.route.index");
+        Route::post("create", "RouteController@create")->name("panel.route.create");
+        Route::post("update", "RouteController@update")->name("panel.route.update");
+        Route::post("delete", "RouteController@delete")->name("panel.route.delete");
+        Route::post("update/state", "RouteController@updateState")->name("panel.route.state");
+        Route::post("get", "RouteController@get")->name("panel.route.get");
+    });
+    //./category end
+
+
+    Route::get('/home', 'HomeController@index')->name('panel.home');
+});
+
+Route::get('/flush', function () {
+    \App\Models\SelectScope::columnsFlushCache();
+    return "OK";
+});
+
+
+\Illuminate\Support\Facades\Auth::routes();
 
 
 

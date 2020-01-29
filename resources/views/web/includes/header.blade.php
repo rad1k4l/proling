@@ -15,23 +15,26 @@
 
                 @foreach($categories as $category)
                     <li class="nav-item pl-1">
-                        <a class="nav-link" href="{{ route('homepage') }}">Home</a>
+                        <a class="nav-link" href="{{ route($category->route) }}" > {{ $category->name }} </a>
                     </li>
-                    <li class="nav-item pl-1">
-                        <a class="nav-link" href="{{ route('about') }}">About</a>
-                    </li>
-                    <li class="nav-item pl-1">
-                        <a class="nav-link" href="{{ route('service') }}">Services</a>
-                    </li>
-                    <li class="nav-item pl-1">
-                        <a class="nav-link" href="{{ route('language') }}">Languages</a>
-                    </li>
-                    <li class="nav-item pl-1">
-                        <a class="nav-link" href="{{ route('price') }}">Prices</a>
-                    </li>
-                    <li class="nav-item pl-1">
-                        <a class="nav-link" href="{{ route('contact')}}">Contact</a>
-                    </li>
+{{--                    <li class="nav-item pl-1">--}}
+{{--                        <a class="nav-link" href="{{ route('homepage') }}">Home</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item pl-1">--}}
+{{--                        <a class="nav-link" href="{{ route('about') }}">About</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item pl-1">--}}
+{{--                        <a class="nav-link" href="{{ route('service') }}">Services</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item pl-1">--}}
+{{--                        <a class="nav-link" href="{{ route('language') }}">Languages</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item pl-1">--}}
+{{--                        <a class="nav-link" href="{{ route('price') }}">Prices</a>--}}
+{{--                    </li>--}}
+{{--                    <li class="nav-item pl-1">--}}
+{{--                        <a class="nav-link" href="{{ route('contact')}}">Contact</a>--}}
+{{--                    </li>--}}
                 @endforeach
 			</ul>
 
