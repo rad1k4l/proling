@@ -19,6 +19,9 @@ class AboutController extends Controller
     {
         $about = About::where('type', About::MAIN)->first();
         $aboutCards = About::where('type', About::CARD)->orderBy('sort', 'desc')->get();
+
+
+        
         return view('web.pages.about', compact('about', 'aboutCards'));
     }
 
