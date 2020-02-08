@@ -21,7 +21,7 @@ class AboutController extends Controller
         $aboutCards = About::where('type', About::CARD)->orderBy('sort', 'desc')->get();
 
 
-        
+
         return view('web.pages.about', compact('about', 'aboutCards'));
     }
 

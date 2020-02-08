@@ -98,7 +98,6 @@ class RouteController extends Controller
             Routes::where("id" , "=" , $id)
                 ->update([
                     "sort" => $k,
-                    "parent" => $pid
                 ]);
             if (isset($cat["children"])){
                 $this->saveState($cat["children"] , $id);
