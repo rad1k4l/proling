@@ -16,7 +16,7 @@ class RouteController extends Controller
 {
 
     public function index() {
-        $routes = Routes::all();
+        $routes = Routes::menu();
         return view("panel.route.index", compact('routes'));
     }
 
@@ -82,17 +82,17 @@ class RouteController extends Controller
 
     public function updateState(Request $request) {
 
-//        $categoriesId = $request->validate([
-//            "data" => "required"
-//        ]);
-//
-//        $this->saveState($categoriesId['data']);
+        $categoriesId = $request
+            ->validate([
+                "data" => "required"
+            ]);
+        $this->saveState($categoriesId['data']);
         return response()->json([
             "status" => "OK"
         ]);
     }
 
-    public function saveState($ids , $pid = 0 ){
+    public function saveState($ids, $pid = 0){
         foreach ($ids as $k => $cat) {
             $id = $cat['id'];
             Routes::where("id" , "=" , $id)

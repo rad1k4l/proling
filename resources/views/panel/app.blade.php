@@ -9,38 +9,35 @@
     <meta name="author" content="ThemeSelect">
 
     @yield("view_meta_tags")
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <title>@yield("title")</title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <!-- BEGIN: VENDOR CSS-->
-    <link rel="stylesheet" type="text/css" href="/user/vendors/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="/user/vendors/animate-css/animate.css">
-    <link rel="stylesheet" type="text/css" href="/user/vendors/chartist-js/chartist.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset("/user/vendors/chartist-js/chartist-plugin-tooltip.css") }}">
+    <link rel="stylesheet" type="text/css" href="/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="/vendors/animate-css/animate.css">
+    <link rel="stylesheet" type="text/css" href="/vendors/chartist-js/chartist.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset("/vendors/chartist-js/chartist-plugin-tooltip.css") }}">
     <!-- END: VENDOR CSS-->
 
     <!-- BEGIN: Page Level CSS-->
-    <link rel="stylesheet" href="{{ asset("user/css/materialize.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/materialize.css") }}">
     <style>
         .debug {
             border-style: groove;
             border-color: red;
         }
     </style>
-    <link rel="stylesheet" type="text/css" href="/user/css/themes/style.css">
-    <link rel="stylesheet" type="text/css" href="/user/css/pages/user-profile-page.css">
-    <link rel="stylesheet" type="text/css" href="/user/css/pages/dashboard-modern.css">
+    <link rel="stylesheet" type="text/css" href="/css/themes/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/pages/user-profile-page.css">
+    <link rel="stylesheet" type="text/css" href="/css/pages/dashboard-modern.css">
     <!-- END: Page Level CSS-->
-
+    @yield('application_css')
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset("/user/css/custom/custom.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset("css/custom/custom.css") }}">
     <!-- END: Custom CSS-->
     @include("panel.template.header")
-    @yield('application_css')
+
 </head>
 
 <body class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu 2-columns  " data-open="click" data-menu="vertical-modern-menu" data-col="2-columns">

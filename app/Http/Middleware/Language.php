@@ -24,7 +24,7 @@ class Language
         if (!in_array($first_segment, config("app.locales"))) {
             return redirect("/{$this->default}/{$path}", 301);
         }
-        URL::defaults(['main_lang' => $this->default]);
+        URL::defaults([ 'main_lang' => $this->default ]);
         app()->setLocale($first_segment);
         return $next($request);
     }

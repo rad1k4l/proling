@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CompressOutput;
 use App\Http\Middleware\Language;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -20,7 +21,7 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-
+//        CompressOutput::class
 
     ];
 

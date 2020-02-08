@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         ViewFacade::composer(['web.layouts.app'], function(View $view){
-            $categories = Category::all();
+            $categories = Category::orderBy('sort', 'asc')->get();
             $view->with(compact("categories"));
         });
 

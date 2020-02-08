@@ -31,27 +31,35 @@ Route::group([ 'prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalizat
 
     Route::get('/privacy-policy', ['as' => 'privacy-policy', 'uses' => 'PrivacyPolicyController@index']);
 
+    Route::get('/state', function () {
+
+        return LaravelLocalization::localizeUrl(route('about', ['state' => 'ad']));
+    });
+
 });
 
 // admin permissions
-Route::group([ /*'middleware' => "permissions",*/ 'namespace' => 'Panel' , 'prefix' => 'panel'], function () {
+Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'panel'], function () {
+    Route::get('/logout', function() {
+        auth()->logout();
+        return redirect()->route('login');
+    })->name('panel.logout');
 
     //  Users
     Route::group(['prefix' => 'user', 'as' => 'panel.user.'], function(){
         Route::get('list/index', "UserController@listIndex")->name("list.index");
         Route::post('list/get', "UserController@userList")->name("list.get");
     });
-
     // ./users
 
     // cache
     Route::get('/clear-cache', function() {
         Artisan::call('cache:clear');
         Artisan::call('route:clear');
-
         Artisan::call('config:clear');
+        \App\Models\SelectScope::columnsFlushCache();
         Artisan::call('view:clear');
-        return redirect()->back()->with('message', "Cache silindi");
+        return redirect()->back()->with('success', "Cache silindi");
     })->name('cache.clear');
     // ./cache
 
@@ -81,14 +89,14 @@ Route::group([ /*'middleware' => "permissions",*/ 'namespace' => 'Panel' , 'pref
             ->name("panel.currency.delete");
     });
     //        currency end
-
-    Route::group(['prefix' => "routes11"], function () {
-        Route::get('/', "RoutesController@index")->name("panel.routes");
-        Route::get('/get/{id}', "RoutesController@edit")->name("panel.routes.edit.form")
-            ->where('id', '[0-9]+');
-        Route::post('/new', "RoutesController@save")->name("panel.routes.save");
-        Route::post('/update/{id}', "RoutesController@update")->name("panel.routes.update");
-    });
+//
+//    Route::group(['prefix' => "routes11"], function () {
+//        Route::get('/', "RoutesController@index")->name("panel.routes");
+//        Route::get('/get/{id}', "RoutesController@edit")->name("panel.routes.edit.form")
+//            ->where('id', '[0-9]+');
+//        Route::post('/new', "RoutesController@save")->name("panel.routes.save");
+//        Route::post('/update/{id}', "RoutesController@update")->name("panel.routes.update");
+//    });
 
 
     // category route
@@ -103,16 +111,43 @@ Route::group([ /*'middleware' => "permissions",*/ 'namespace' => 'Panel' , 'pref
     //./category end
 
 
-    Route::get('/home', 'HomeController@index')->name('panel.home');
+
+    // About route
+    Route::group([ 'prefix' => 'about/main' ], function () {
+        Route::get('index', "AboutController@index")
+            ->name("panel.about.index");
+
+        Route::post('update', "AboutController@update")
+            ->name("panel.about.update");
+    });
+    //./About end
+
+    // About cards route
+    Route::group(["prefix" => "about/cards"], function () {
+        Route::get('index', "AboutCardController@index")->name("panel.about.cards.index");
+        Route::post("create", "AboutCardController@create")->name("panel.about.cards.create");
+        Route::post("update", "AboutCardController@update")->name("panel.about.cards.update");
+        Route::post("delete", "AboutCardController@delete")->name("panel.about.cards.delete");
+        Route::post("update/state", "AboutCardController@updateState")->name("panel.about.cards.state");
+        Route::post("get", "AboutCardController@get")->name("panel.about.cards.get");
+    });
+    //./About cards end
+
+
+
+
+    Route::get('home', 'HomeController@index')->name('panel.home');
 });
 
-Route::get('/flush', function () {
-    \App\Models\SelectScope::columnsFlushCache();
-    return "OK";
+
+Route::group([ 'middleware' =>'auth', 'prefix' => 'panel' ], function (){
+    Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+    Route::post('register', 'Auth\RegisterController@register');
+
 });
 
 
-\Illuminate\Support\Facades\Auth::routes();
-
-
-
+\Illuminate\Support\Facades\Auth::routes([
+    'register' => (bool)env('APP_REGISTER', false),
+    'reset' =>  (bool)env('APP_RESET', false)
+]);

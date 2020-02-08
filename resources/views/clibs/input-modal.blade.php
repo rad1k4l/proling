@@ -1,16 +1,23 @@
 
 @section("input-modal")
-    <div id="input-modal" class="modal col s4" style="width: 541px;">
+    <style>
+        .modal{
+            max-height: 100% !important;
+        }
+    </style>
+    <div id="input-modal" class="modal col s4" :style = "{ width: sources._width ?? 600 + 'px',  height : sources._height ?? 900 + 'px !important' }">
         <div class="modal-content">
-            <h4> @{{ sources._title }}</h4>
-            <h6 style="color: #ff0e07">@{{ error }}</h6>
+            <h4> @{{ sources._title ?? "Title"}}</h4>
+            <h6 v-if="error" style="color: #ff0e07">@{{ error ?? "" }}</h6>
             <div v-if="source.type !== undefined" v-for="(source , k) in sources" class="input-field">
                 <input
                     :id="'input_' + k"
-                    :class="{
-                    valid : source.error !== undefined && source.error ===false,
-                    invalid : source.error !== undefined && source.error === true
-                    }"
+                    :class="
+                        {
+                            valid : source.error !== undefined && source.error === false,
+                            invalid : source.error !== undefined && source.error === true
+                        }
+                    "
                     v-if="source.type == 'text' || source.type == 'email' || source.type == 'password'"
                     :type="source.type"
                     v-model="source.data"
@@ -18,22 +25,24 @@
                     ref = "input"
                     v-on:keydown.enter="submit()"
                 >
+
                 <textarea
+                    v-if="source.type == 'textarea'"
                     :id="'input_' + k"
                     :class="{ valid : source.error !== undefined && source.error ===false,
                             invalid : source.error !== undefined && source.error === true ,}"
-                    v-if="source.type == 'textarea'"
                     cols="30"
                     rows="10"
                     class="validate"
-                > </textarea>
+                >
+                </textarea>
                 <label
                     :for="'input_' + k"
                     :data-error="source.onError ?source.onError : 'Invalid input'"
                     :data-success="source.onSuccess  ? source.onSuccess : ''"
                     :class="{active : source.data ? true : false && source.data.length > 0 }"
                 >
-                    @{{ source.label ? source.label :  k}}
+                    @{{ source.label ?? k }}
                 </label>
             </div>
         </div>
@@ -52,7 +61,10 @@
         var modal = new Vue({
             el : "#input-modal",
             data : {
-                sources : { },
+                sources : {
+                    _width : 20,
+                    _title : 'Default Title'
+                },
                 onSubmit : null,
                 modInstance : null,
                 error : null
@@ -61,17 +73,11 @@
                 setup : function(){
                     this.modInstance = $('#input-modal').modal({
                         dismissible: true,
-                        opacity: .5,
-                        inDuration: 150,
-                        outDuration: 150,
-                        startingTop: '3%',
-                        endingTop: '25%',
-                        ready: function(modal, trigger) {
-                            console.log("ready modal ");
-                        },
-                        complete: function() {
-                            console.log("complete modal");
-                        }
+                        opacity: .1,
+                        inDuration: 300,
+                        outDuration: 200,
+                        startingTop: '5%',
+                        endingTop: '10%',
                     });
                 },
                 openModal : function ( ) {

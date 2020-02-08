@@ -37,7 +37,13 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->redirectTo = route('panel.route.index');
+//        $this->middleware('guest');
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('panel.register');
     }
 
     /**

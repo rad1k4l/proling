@@ -19,7 +19,7 @@ class Routes extends OptimizeModel
     }
 
     private static function _menu(){
-        return self::all()->toArray();
+        return self::orderBy('sort', 'asc')->get()->toArray();
     }
 
 }

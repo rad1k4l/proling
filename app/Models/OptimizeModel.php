@@ -14,18 +14,15 @@ class OptimizeModel extends Model
     protected static function boot()
     {
         parent::boot();
-
         self::addGlobalScope(
-            new SelectScope(static::$columns)
+            new SelectScope(static::columns())
         );
-
-        self::columns();
     }
 
     /**
      * @return array
      */
-    public static function columns(): array
+    private static function columns(): array
     {
         return static::$columns;
     }

@@ -66,6 +66,8 @@
 
     @include("clibs.input-modal")
     <script>
+
+
         function checkResponse(response){
             return response.status === 200 && response.data.status.toLowerCase() === 'ok';
         }

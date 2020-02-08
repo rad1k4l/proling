@@ -11,26 +11,26 @@
 
 <!-- END: Footer-->
 <!-- BEGIN VENDOR JS-->
-<script src="/user/js/vendors.min.js" type="text/javascript"></script>
+<script src="/js/vendors.min.js" type="text/javascript"></script>
 <!-- BEGIN VENDOR JS-->
 <!-- BEGIN PAGE VENDOR JS-->
-<script src="/user/vendors/chartjs/chart.min.js" type="text/javascript"></script>
-<script src="/user/vendors/chartist-js/chartist.min.js" type="text/javascript"></script>
+<script src="/vendors/chartjs/chart.min.js" type="text/javascript"></script>
+<script src="/vendors/chartist-js/chartist.min.js" type="text/javascript"></script>
 {{--<script src="/panel/vendors/chartist-js/chartist-plugin-tooltip.js" type="text/javascript"></script>--}}
-<script src="/user/vendors/chartist-js/chartist-plugin-fill-donut.min.js" type="text/javascript"></script>
+<script src="/vendors/chartist-js/chartist-plugin-fill-donut.min.js" type="text/javascript"></script>
 <!-- END PAGE VENDOR JS-->
 <!-- BEGIN THEME  JS-->
-<script src="/user/js/plugins.js" type="text/javascript"></script>
-<script src="/user/js/custom/custom-script.js" type="text/javascript"></script>
-<script src="/user/js/scripts/customizer.js" type="text/javascript"></script>
+<script src="/js/plugins.js" type="text/javascript"></script>
+<script src="/js/custom/custom-script.js" type="text/javascript"></script>
+<script src="/js/scripts/customizer.js" type="text/javascript"></script>
 <!-- END THEME  JS-->
 <!-- BEGIN PAGE LEVEL JS-->
 {{--<script src="/panel/js/scripts/dashboard-modern.js" type="text/javascript"></script>--}}
-<script src="{{ asset('user/js/vue.dev.js') }}"></script>
-<script src="{{ asset("user/js/axios.js") }}"></script>
+<script src="{{ asset('js/vue.dev.js') }}"></script>
+<script src="{{ asset("js/axios.js") }}"></script>
 
-<script src="{{ asset('user/js/scripts/sweet.js') }}"></script>
-<script src="{{ asset('user/js/scripts/advance-ui-modals.js') }}"></script>
+<script src="{{ asset('js/scripts/sweet.js') }}"></script>
+<script src="{{ asset('js/scripts/advance-ui-modals.js') }}"></script>
 @yield("application_javascript")
 
 
@@ -45,6 +45,16 @@
     </script>
 
 @endif
+
+
+
+@if(session("message"))
+    <script>
+        M.toast({html: '{{ session("message") }}'  });
+    </script>
+
+@endif
+
 @if(session("error"))
     <style>
         .toast{
@@ -56,11 +66,6 @@
     </script>
 @endif
 
-
-
-
-
-<!-- END PAGE LEVEL JS-->
 </body>
 </html>
 

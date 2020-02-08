@@ -15,26 +15,9 @@
 
                 @foreach($categories as $category)
                     <li class="nav-item pl-1">
-                        <a class="nav-link" href="{{ route($category->route) }}" > {{ $category->name }} </a>
+                        <a class="nav-link" href="{{ LaravelLocalization::localizeUrl( route($category->route) ) }}" > {{ $category->name }} </a>
                     </li>
-{{--                    <li class="nav-item pl-1">--}}
-{{--                        <a class="nav-link" href="{{ route('homepage') }}">Home</a>--}}
-{{--                    </li>--}}
-{{--                    <li class="nav-item pl-1">--}}
-{{--                        <a class="nav-link" href="{{ route('about') }}">About</a>--}}
-{{--                    </li>--}}
-{{--                    <li class="nav-item pl-1">--}}
-{{--                        <a class="nav-link" href="{{ route('service') }}">Services</a>--}}
-{{--                    </li>--}}
-{{--                    <li class="nav-item pl-1">--}}
-{{--                        <a class="nav-link" href="{{ route('language') }}">Languages</a>--}}
-{{--                    </li>--}}
-{{--                    <li class="nav-item pl-1">--}}
-{{--                        <a class="nav-link" href="{{ route('price') }}">Prices</a>--}}
-{{--                    </li>--}}
-{{--                    <li class="nav-item pl-1">--}}
-{{--                        <a class="nav-link" href="{{ route('contact')}}">Contact</a>--}}
-{{--                    </li>--}}
+
                 @endforeach
 			</ul>
 
@@ -43,13 +26,14 @@
 				<div class="btn-group mx-3">
 					<!--Trigger-->
 					<a class="nav-link dropdown-toggle" type="button" id="dropdown09" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-az"> </span> Azərbaycan</a>
+					aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-{{ app()->getLocale() == 'en' ? 'us' : app()->getLocale() }}"> </span> {{ config('laravellocalization.supportedLocales.'. app()->getLocale() . '.native') }}</a>
 					<!--Menu-->
 					<div class="dropdown-menu">
-						<a class="dropdown-item active" href="#az"><span class="flag-icon flag-icon-az"> </span>  Azərbaycan</a>
-						<a class="dropdown-item" href="#ru"><span class="flag-icon flag-icon-ru"> </span>  Russian</a>
-						<a class="dropdown-item"href="#en"><span class="flag-icon flag-icon-us"> </span>  English</a>
-
+                        @foreach(config('laravellocalization.supportedLocales') as $code => $locale)
+                            @if($code !== app()->getLocale())
+                                <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL($code) }}"><span class="flag-icon flag-icon-{{  $code == 'en' ? 'us' : $code }}"> </span>{{ $locale['native'] }}</a>
+						    @endif
+                        @endforeach
 					</div>
 				</div>
 				<!--/Dropdown primary-->
@@ -188,15 +172,10 @@
 
 <script type="text/javascript">
 	$(function() {
-        // this will get the full URL at the address bar
-        var url = window.location.href;
-
-        // passes on every "a" tag
+        let url = window.location.href;
         $(".navbar-nav a").each(function() {
-            // checks if its the same on the address bar
             if (url === (this.href)) {
             	$(this).closest("li").addClass("active");
-                //for making parent of submenu active
                 $(this).closest("li").parent().parent().addClass("active");
             }
         });

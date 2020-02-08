@@ -32,7 +32,7 @@
                                 <div class="card-content" style="height: 500px">
                                    <div class="col s10">
                                        <div class="dd" id="categories">
-                                           @include("panel.category.list")
+                                           @include("panel.about.cards.list")
                                        </div>
                                    </div>
                                     <div class="col s2 center">
@@ -76,19 +76,23 @@
             data : {
                 state : null,
                 modalTemplate: {
+                    _width : 800,
                    @foreach(config("laravellocalization.supportedLocales") as $code => $lang )
-                       {{ "category_".$code . ":"  }}
+                       {{ "title_".$code . ":"  }}
                        {{ "{" }}
                             data : "",
-                            label : "Kateqoriya " + "{{ $lang['native'] }}",
+                            label : "Başlıq " + "{{ $lang['native'] }}",
                             type : "text"
                        {{  "}," }}
                    @endforeach
-                    route : {
-                        data : "",
-                           label : "Category Route",
-                           type : 'text'
-                    }
+                   @foreach(config("laravellocalization.supportedLocales") as $code => $lang )
+                       {{ "body_".$code . ":"  }}
+                       {{ "{" }}
+                            data : "",
+                            label : "Card Mətni " + "{{ $lang['native'] }}",
+                            type : "text"
+                       {{  "}," }}
+                   @endforeach
                 }
             },
             methods : {
@@ -97,7 +101,7 @@
                 },
                 save: function () {
                     if(this.state !== null){
-                        axios.post("{{ route("panel.category.state") }}" , {
+                        axios.post("{{ route("panel.about.cards.state") }}" , {
                             data : this.state
                         }).then(response => {
                             if(response.status === 200){
@@ -111,7 +115,7 @@
                 add: function () {
                     modal.open(this.modalTemplate, function (submitted) {
                         return new Promise(resolve => {
-                            axios.post("{{ route("panel.category.create") }}", {  submitted  })
+                            axios.post("{{ route("panel.about.cards.create") }}", {  submitted  })
                                 .then(response => {
                                     if(checkResponse(response)){
                                         window.location.reload();
@@ -129,20 +133,20 @@
                     });
                 },
                 edit: function (id) {
-                    axios.post("{{ route("panel.category.get") }}", { id : id}).then(response => {
+                    axios.post("{{ route("panel.about.cards.get") }}", { id : id }).then(response => {
                         let that = this;
 
                         if (checkResponse(response)) {
                             let data = response.data.data ;
                             let template = JSON.parse(JSON.stringify(that.modalTemplate));
                             data.translations.forEach(function (value) {
-                                template["category_" + value.locale].data = value.name;
+                                template["title_" + value.locale].data = value.title;
+                                template["body_" + value.locale].data = value.body;
                             });
-                            template.route.data = data.route;
-                            template._title = "Category Edit";
+                            template._title = "About Kartı";
                             modal.open(template, function (submitted) {
                                 return new Promise(resolve => {
-                                    axios.post("{{ route("panel.category.update") }}",{
+                                    axios.post("{{ route("panel.about.cards.update") }}",{
                                         id : id ,
                                         submitted
                                     }).then(response => {
@@ -161,28 +165,26 @@
 
                     }).catch();
                 },
-                del : function  (id) {
-                    let that = this;
+                del : function (id) {
                     swal({
-                        title: "Seçilmiş kategoriya silinsin ?",
+                        title: "Seçilmiş kart silinsin ?",
                         text: "",
                         icon: 'warning',
                         dangerMode: true,
                         buttons: {
-                            cancel: 'Cancel',
-                            delete: 'OK'
+                            cancel: 'Ləğv et',
+                            delete: 'Təsdiq'
                         }
                     }).then(function (willDelete) {
                         if (willDelete) {
-                            axios.post("{{ route("panel.category.delete") }}",{
-                                category_id : id
+                            axios.post("{{ route("panel.about.cards.delete") }}",{
+                                card_id : id
                             }).then(response =>{
                                 if(response.status ===  200)
                                     if (response.data.status === "OK"){
                                         window.location.reload();
                                     }
-                            })
-                                .catch();
+                            }).catch();
                         }
                     });
                 },

@@ -7,5 +7,11 @@
       <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mariadb://localhost:3306/proling</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="proling" uuid="981ece76-6bf0-438a-9391-7a737e8d5436">
+      <driver-ref>mariadb</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.mariadb.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mariadb://proling.az:3306</jdbc-url>
+    </data-source>
   </component>
 </project>
