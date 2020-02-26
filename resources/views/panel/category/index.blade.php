@@ -81,7 +81,7 @@
                        {{ "{" }}
                             data : "",
                             label : "Kateqoriya " + "{{ $lang['native'] }}",
-                            type : "text"
+                            type : "text",
                        {{  "}," }}
                    @endforeach
                     route : {
