@@ -1,14 +1,14 @@
 @extends("panel.app")
+
 @section("title")
-    Kategoriyalar
+    Dil Xidmətləri
 @endsection
+
 @section("content")
-    <!-- BEGIN: Page Main-->
     <div id="main">
         <div class="row">
             <div class="content-wrapper-before gradient-45deg-indigo-purple"></div>
             <div class="breadcrumbs-dark pb-0 pt-4" id="breadcrumbs-wrapper">
-                <!-- Search for small screen-->
                 <div class="container">
                     <div class="row">
                         <div class="col s10 m6 l6">
@@ -22,26 +22,24 @@
             </div>
             <div class="col s12">
                 <div class="container">
-                    <!-- Dark Theme -->
-                    <!-- Draggable Handles -->
                     <div class="row">
                         <div class="col s12 m12 l12">
 
                             <div id="draggable-handles" class="card card card-default scrollspy categories">
                                 <div style="height: 500px;" class="card-content">
-                                   <div class="col s10">
+                                   <div class="col s8">
                                        <div class="dd" id="categories">
-                                           @include("panel.route.list")
+                                           @include("panel.language-service.list", compact('services'))
                                        </div>
                                    </div>
-                                    <div class="col s2 center">
+                                    <div class="col s4 align-content-lg-end">
                                         <div class="row" >
                                             <div class="container">
                                                 <div class="col s6">
-                                                    <a  @click.prevent="save" class="btn waves-effect waves-teal">Save</a>
+                                                    <a @click.prevent="save" class="btn waves-effect waves-teal">Yaddaşa yaz</a>
                                                 </div>
                                                 <div class="col s6">
-                                                    <a  @click.prevent="add" class="btn waves-effect waves-teal">New </a>
+                                                    <a @click.prevent="add" class="btn waves-effect waves-teal">Yeni</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -49,41 +47,32 @@
                                 </div>
                             </div>
                         </div>
-                    </div><!-- START RIGHT SIDEBAR NAV -->
-                    <!-- END RIGHT SIDEBAR NAV -->
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- END: Page Main-->
 @endsection
 
 
 @section("application_javascript")
-
     <link rel="stylesheet" type="text/css" href="https://pixinvent.com/materialize-material-design-admin-template/app-assets/vendors/jquery.nestable/nestable.css">
     <script src="https://pixinvent.com/materialize-material-design-admin-template/app-assets/vendors/jquery.nestable/jquery.nestable.js"></script>
-
     @include("clibs.input-modal")
     <script>
-
 
         function checkResponse(response){
             return response.status === 200 && response.data.status.toLowerCase() === 'ok';
         }
 
-        let categories = new Vue({
+        const categories = new Vue({
             el : ".categories",
             data : {
                 state : null,
                 modalTemplate: {
-                    _title :"Add Routes",
-                    title : {
-                        label : 'Route title',
-                        type : 'text'
-                    },
-                    route : {
-                        label : "Sys route name",
+                    _title :"Dil Xidməti Əlavə et",
+                    name : {
+                        label : 'Xidmət adı',
                         type : 'text'
                     }
                 }
@@ -95,7 +84,7 @@
 
                 save: function () {
                     if(this.state !== null){
-                        axios.post("{{ route("panel.route.state") }}" , {
+                        axios.post("{{ route("panel.language.services.state") }}" , {
                             data : this.state
                         }).then(response => {
                             if(checkResponse(response)){
@@ -109,13 +98,13 @@
                     modal.open(this.modalTemplate, function (submitted) {
                         console.log(submitted);
                         return new Promise(resolve => {
-                            axios.post("{{ route("panel.route.create") }}", {
+                            axios.post("{{ route("panel.language.services.create") }}", {
                                 submitted
                             }).then(response => {
                                 if(checkResponse(response)){
                                     window.location.reload();
                                     resolve(true);
-                                }else{
+                                } else {
                                     resolve(response.data.info);
                                 }
                             }).catch(error => {
@@ -126,16 +115,15 @@
                 },
 
                 edit: function (id) {
-                    axios.post("{{ route("panel.route.get") }}", { id : id }).then(response => {
+                    axios.post("{{ route("panel.language.services.get") }}", { id : id }).then(response => {
                         let that = this;
                         if(checkResponse(response)){
                             let template = JSON.parse(JSON.stringify(that.modalTemplate));
-                                template.title.data = response.data.data.title;
-                                template.route.data = response.data.data.name;
-                                template._title = "Route Edit";
+                                template.name.data = response.data.data.name;
+                                template._title = "Dil Xidməti Redaktə";
                             modal.open(template, function (submitted) {
                                 return new Promise(resolve => {
-                                    axios.post("{{ route("panel.route.update") }}", {
+                                    axios.post("{{ route("panel.language.services.update") }}", {
                                         id : id,
                                         submitted
                                     }).then(response => {
@@ -153,7 +141,6 @@
                                     })
                                 })
                             });
-
                         }
                     }).catch();
                 },
@@ -170,8 +157,8 @@
                         }
                     }).then(function (willDelete) {
                         if (willDelete) {
-                            axios.post("{{ route("panel.route.delete") }}",{
-                                category_id : id
+                            axios.post("{{ route("panel.language.services.delete") }}",{
+                                id : id
                             }).then(response =>{
                                 if(checkResponse(response)){
                                     window.location.reload();

@@ -11,11 +11,8 @@ namespace App\Http\Controllers\Panel {
     use Illuminate\Routing\Route;
     use Illuminate\Support\Facades\Validator;
 
-
-    class RoutesController extends Controller
-    {
+    class RoutesController extends Controller{
         public function index(){
-
             $routes = Routes::menu();
             $icons = Icon::all();
             $languages = [];

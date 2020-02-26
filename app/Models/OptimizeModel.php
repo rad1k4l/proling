@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OptimizeModel extends Model
 {
-    protected static $columns = [
-    ];
+    protected static $columns = [];
 
     protected static function boot()
     {

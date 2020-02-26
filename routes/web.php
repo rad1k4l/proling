@@ -52,16 +52,7 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
     });
     // ./users
 
-    // cache
-    Route::get('/clear-cache', function() {
-        Artisan::call('cache:clear');
-        Artisan::call('route:clear');
-        Artisan::call('config:clear');
-        \App\Models\SelectScope::columnsFlushCache();
-        Artisan::call('view:clear');
-        return redirect()->back()->with('success', "Cache silindi");
-    })->name('cache.clear');
-    // ./cache
+
 
     // category route
     Route::group(["prefix" => "category"], function () {
@@ -111,6 +102,18 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
     //./category end
 
 
+    // category route
+    Route::group(["prefix" => "language/services"], function () {
+        Route::get('index', "LanguageServicesController@index")->name("panel.language.services.index");
+        Route::post("create", "LanguageServicesController@create")->name("panel.language.services.create");
+        Route::post("update", "LanguageServicesController@update")->name("panel.language.services.update");
+        Route::post("delete", "LanguageServicesController@delete")->name("panel.language.services.delete");
+        Route::post("update/state", "LanguageServicesController@updateState")->name("panel.language.services.state");
+        Route::post("get", "LanguageServicesController@get")->name("panel.language.services.get");
+    });
+    //./category end
+
+
 
     // About route
     Route::group([ 'prefix' => 'about/main' ], function () {
@@ -133,9 +136,6 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
     });
     //./About cards end
 
-
-
-
     Route::get('home', 'HomeController@index')->name('panel.home');
 });
 
@@ -151,3 +151,13 @@ Route::group([ 'middleware' =>'auth', 'prefix' => 'panel' ], function (){
     'register' => (bool)env('APP_REGISTER', false),
     'reset' =>  (bool)env('APP_RESET', false)
 ]);
+// cache
+Route::get('/flush', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    \App\Models\SelectScope::columnsFlushCache();
+    Artisan::call('view:clear');
+    return redirect()->back()->with('success', "Cache silindi");
+})->name('cache.clear');
+// ./cache

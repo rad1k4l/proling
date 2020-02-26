@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Scope;
@@ -15,7 +14,7 @@ class SelectScope implements Scope
     private $columns = [];
 
 
-    private $cacheKey= 'optimized.model.columns.<db>.<table>';
+    private $cacheKey = 'optimized.model.columns.<db>.<table>';
 
     public function __construct($cols = [])
     {

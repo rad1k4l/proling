@@ -8,7 +8,7 @@ namespace App\Http\Controllers\Panel {
     {
 
         public function index(){
-            return view("panel.main");
+            return redirect()->route('panel.about.index');
         }
 
 
