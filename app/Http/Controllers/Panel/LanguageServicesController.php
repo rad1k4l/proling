@@ -14,7 +14,7 @@ class LanguageServicesController extends ApiController {
 
     public function index() {
         $languageServices = LanguageService::all();
-        return view("panel.language-service.index", ['services' => $languageServices]);
+        return view("panel.language-service.index", [ 'services' => $languageServices]);
     }
 
     public function create(Add $request) {

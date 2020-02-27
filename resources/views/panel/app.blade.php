@@ -10,7 +10,7 @@
 
     @yield("view_meta_tags")
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield("title")</title>
+    <title>@yield("title") </title>
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 

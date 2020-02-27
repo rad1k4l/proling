@@ -65,6 +65,20 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
     });
     //./category end
 
+
+    // category route
+    Route::group(["prefix" => "translate/services"], function () {
+        Route::get("/", "TranslateServiceController@index")->name("panel.translate.service.index");
+        Route::post("create", "TranslateServiceController@create")->name("panel.translate.service.create");
+        Route::post("update", "TranslateServiceController@update")->name("panel.translate.service.update");
+        Route::post("delete", "TranslateServiceController@delete")->name("panel.translate.service.delete");
+        Route::post("update/state", "TranslateServiceController@updateState")->name("panel.translate.service.state");
+        Route::post("get", "TranslateServiceController@get")->name("panel.translate.service.get");
+    });
+    //./category end
+
+
+
     // currency route
     Route::group(["prefix" => "currency"], function () {
         Route::get("index", "CurrencyController@index")
@@ -80,14 +94,7 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
             ->name("panel.currency.delete");
     });
     //        currency end
-//
-//    Route::group(['prefix' => "routes11"], function () {
-//        Route::get('/', "RoutesController@index")->name("panel.routes");
-//        Route::get('/get/{id}', "RoutesController@edit")->name("panel.routes.edit.form")
-//            ->where('id', '[0-9]+');
-//        Route::post('/new', "RoutesController@save")->name("panel.routes.save");
-//        Route::post('/update/{id}', "RoutesController@update")->name("panel.routes.update");
-//    });
+
 
 
     // category route
@@ -102,7 +109,7 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
     //./category end
 
 
-    // category route
+    // lang services route
     Route::group(["prefix" => "language/services"], function () {
         Route::get('index', "LanguageServicesController@index")->name("panel.language.services.index");
         Route::post("create", "LanguageServicesController@create")->name("panel.language.services.create");
@@ -111,7 +118,7 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
         Route::post("update/state", "LanguageServicesController@updateState")->name("panel.language.services.state");
         Route::post("get", "LanguageServicesController@get")->name("panel.language.services.get");
     });
-    //./category end
+    //./lang services end
 
 
 

@@ -84,11 +84,10 @@ namespace App\Http\Controllers\Panel {
             if ($model === null) {
                 return redirect()->back()->with("error" , "Bu route dəyişdirilə bilməz");
             }
-            try{
-                \route($validatedData["name"]);
-            }catch (\Exception $exception){
+
+            if(!$this->isValidRoute($validatedData['name']))
                 return redirect()->back()->with("error" , "Belə bir route mövcud deyil");
-            }
+
             $model->name = $validatedData["name"];
             $model->icon = $validatedData["icon"];
             $model->for_admin = $request->post("for_admin" , false) !== false ? 1 : 0;
@@ -97,6 +96,15 @@ namespace App\Http\Controllers\Panel {
             }
             $model->save();
             return redirect()->route("panel.routes")->with("success" , "Uğurla dəyişdirildi");
+        }
+
+        public function isValidRoute(string $routename ) : bool {
+            try{
+                route($routename);
+                return true;
+            }catch (\Exception $exception) {
+                return false;
+            }
         }
 
 

@@ -12,12 +12,10 @@
             <div v-if="source.type !== undefined" v-for="(source , k) in sources" class="input-field">
                 <input
                     :id="'input_' + k"
-                    :class="
-                        {
-                            valid : source.error !== undefined && source.error === false,
-                            invalid : source.error !== undefined && source.error === true
-                        }
-                    "
+                    :class="{
+                        valid : source.error !== undefined && source.error === false,
+                        invalid : source.error !== undefined && source.error === true
+                    }"
                     v-if="source.type == 'text' || source.type == 'email' || source.type == 'password'"
                     :type="source.type"
                     v-model="source.data"
