@@ -64,7 +64,7 @@
 
 		<!--First slide-->
 		<div class="carousel-item active pb-5 mb-5">
-			<div class="view" style="background-image: url('{{ asset('web/img/slider2.png') }}');">
+			<div class="view" style="background-image: url('{{ asset('web/img/slider2.jpg') }}');">
 				<div class="container h-100 d-flex justify-content-center align-items-center pl-lg-5 pt-lg-5">
 					<div class="row">
 						<div class="col-md-6 text-center text-md-left margins">
@@ -89,7 +89,7 @@
 
 		<!--Second slide-->
 		<div class="carousel-item pb-5 mb-5">
-			<div class="view" style="background-image: url('http://genchi.info/images/city-wallpaper-10.jpg');">
+			<div class="view" style="background-image: url('{{ asset('images/city-wallpaper-101.jpg') }}');">
 				<div class="container h-100 d-flex justify-content-center align-items-center pl-lg-5 pt-lg-5">
 					<div class="row">
 						<div class="col-md-6 text-center text-md-left margins">
@@ -114,7 +114,7 @@
 
 		<!--Third slide-->
 		<div class="carousel-item pb-5 mb-5">
-			<div class="view" style="background-image: url('https://mdbootstrap.com/img/Photos/Others/images/92.jpg');">
+			<div class="view" style="background-image: url('{{ asset('images/92.jpg') }}');">
 				<div class="container h-100 d-flex justify-content-center align-items-center pl-lg-5 pt-lg-5">
 					<div class="row">
 						<div class="col-md-6 text-center text-md-left margins">
