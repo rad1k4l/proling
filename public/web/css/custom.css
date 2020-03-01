@@ -9,10 +9,7 @@
 
 .intro-3
 {
-    background: no-repeat center center;
-    background-image: url("../img/trusted.png");
-    background-position: center right;
-    background-repeat: no-repeat;
+    background: url("/img/trusted.png") no-repeat center right;
     background-size: auto;
 }
 

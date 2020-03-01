@@ -13,7 +13,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
 	<!-- Font Awesome Pro -->
-	<link href="{{ asset('css/pro.min.css') }}" rel="stylesheet" async>
+	<link href="{{ asset('css/pro.min.css') }}?v=5" rel="stylesheet" async>
 	<!-- Font Awesome Free -->
 	<link rel="stylesheet" type="text/css" href="{{ asset("css/font-awesome.min.css") }}" async>
 	<!--Flag Icons-->
