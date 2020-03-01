@@ -13,19 +13,19 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
 	<!-- Font Awesome Pro -->
-	<link href="{{ asset('css/pro.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/pro.min.css') }}" rel="stylesheet" async>
 	<!-- Font Awesome Free -->
-	<link rel="stylesheet" type="text/css" href="{{ asset("css/font-awesome.min.css") }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset("css/font-awesome.min.css") }}" async>
 	<!--Flag Icons-->
-	<link href="{{ asset('css/flag-icon.css') }}" rel="stylesheet">
+	<link href="{{ asset('css/flag-icon.css') }}" rel="stylesheet" async>
 	<!-- Bootstrap core CSS -->
-	<link href="{{ asset('web/css/bootstrap.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('web/css/bootstrap.min.css') }}" rel="stylesheet" async>
 	<!-- Material Design Bootstrap -->
-	<link href="{{ asset('web/css/mdb.min.css') }}" rel="stylesheet">
+	<link href="{{ asset('web/css/mdb.min.css') }}" rel="stylesheet" async>
 	<!-- Normalize Css -->
-	<link href="{{ asset('web/css/normalize.css') }}" rel="stylesheet">
+	<link href="{{ asset('web/css/normalize.css') }}" rel="stylesheet"async >
 	<!-- Custom -->
-	<link href="{{ asset('web/css/custom.css') }}" rel="stylesheet">
+	<link href="{{ asset('web/css/custom.css') }}" rel="stylesheet" async>
 
 	@yield('style')
 
@@ -36,21 +36,21 @@
 	@include('web.includes.header')
 
 	<!--PreLoader-->
-	<div id="mdb-preloader" class="flex-center">
-		<div class="preloader-wrapper active">
-			<div class="spinner-layer spinner-red-only">
-				<div class="circle-clipper left">
-					<div class="circle"></div>
-				</div>
-				<div class="gap-patch">
-					<div class="circle"></div>
-				</div>
-				<div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+{{--	<div id="mdb-preloader" class="flex-center">--}}
+{{--		<div class="preloader-wrapper active">--}}
+{{--			<div class="spinner-layer spinner-red-only">--}}
+{{--				<div class="circle-clipper left">--}}
+{{--					<div class="circle"></div>--}}
+{{--				</div>--}}
+{{--				<div class="gap-patch">--}}
+{{--					<div class="circle"></div>--}}
+{{--				</div>--}}
+{{--				<div class="circle-clipper right">--}}
+{{--					<div class="circle"></div>--}}
+{{--				</div>--}}
+{{--			</div>--}}
+{{--		</div>--}}
+{{--	</div>--}}
 	<!--PreLoader-->
 
 	<!--Main Layout-->
@@ -66,35 +66,17 @@
 	<!--  SCRIPTS  -->
 
 	<!-- JQuery -->
-	<script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+	<script   type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 	<!-- Bootstrap tooltips -->
-	<script type="text/javascript" src="{{ asset('web/js/popper.min.js') }}"></script>
+	<script defer type="text/javascript" src="{{ asset('web/js/popper.min.js') }}"></script>
 	<!-- Bootstrap core JavaScript -->
-	<script type="text/javascript" src="{{ asset('web/js/bootstrap.min.js') }}"></script>
+	<script defer type="text/javascript" src="{{ asset('web/js/bootstrap.min.js') }}"></script>
 	<!-- MDB core JavaScript -->
-	<script type="text/javascript" src="{{ asset('web/js/mdb.min.js') }}"></script>
-    <script src="{{ asset('js/nette.ajax.js') }}"></script>
-	<script>
-		    new WOW().init();
+	<script defer type="text/javascript" src="{{ asset('web/js/mdb.min.js') }}"></script>
+    <script defer src="{{ asset('js/nette.ajax.js') }}"></script>
+    <script defer src="{{ asset('js/custom/custom-script.js') }}"></script>
 
-          // Material Select Initialization
-          $(document).ready(function() {
-            $('.mdb-select').materialSelect();
-          });
-
-          $(window).on("load", function () {
-            $('#mdb-preloader').fadeOut('slow');
-          });
-        $(function () {
-            $.nette.init();
-            $('[data-toggle="tooltip"]').tooltip();
-            $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
-            $(".button-collapse").sideNav();
-            console.log('initialized');
-        });
-  </script>
-
-  @yield('script')
+    @yield('script')
 
   <!--  SCRIPTS  -->
 
