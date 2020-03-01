@@ -7,10 +7,10 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>ProLing</title>
 
-	<!--Fonts-->
-	<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+{{--	<!--Fonts-->--}}
+{{--	<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">--}}
+{{--	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">--}}
+{{--	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">--}}
 
 	<!-- Font Awesome Pro -->
 	<link href="{{ asset('css/pro.min.css') }}?v=5" rel="stylesheet" async>

@@ -11,7 +11,7 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent-7">
 			<ul class="navbar-nav">
                 @foreach($categories as $category)
-                    <li class="nav-item pl-1">
+                    <li class="nav-item pl-1 {{ request()->route()->getName() == $category['route'] ? 'active' : ''}}">
                         <a class="nav-link" href="{{ LaravelLocalization::localizeUrl( route($category['route']) ) }}" > {{ $category['name'] }} </a>
                     </li>
                 @endforeach
@@ -155,20 +155,4 @@
 <!--/.Carousel Wrapper-->
 
 </header>
-<!--Main Navigation-->
 
-@section('script')
-
-<script type="text/javascript">
-	$(function() {
-        let url = window.location.href;
-        $(".navbar-nav a").each(function() {
-            if (url === (this.href)) {
-            	$(this).closest("li").addClass("active");
-                $(this).closest("li").parent().parent().addClass("active");
-            }
-        });
-    });
-</script>
-
-@endsection
