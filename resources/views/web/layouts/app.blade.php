@@ -15,7 +15,7 @@
 	<!-- Font Awesome Pro -->
 	<link href="{{ asset('css/pro.min.css') }}?v=5" rel="stylesheet" async>
 	<!-- Font Awesome Free -->
-	<link rel="stylesheet" type="text/css" href="{{ asset("css/font-awesome.min.css") }}" async>
+	<link rel="stylesheet" type="text/css" href="{{ asset("css/font-awesome.min.css") }}?v=32" async>
 	<!--Flag Icons-->
 	<link href="{{ asset('css/flag-icon.css') }}" rel="stylesheet" async>
 	<!-- Bootstrap core CSS -->
