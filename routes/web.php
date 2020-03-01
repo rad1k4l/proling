@@ -66,7 +66,7 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
     //./category end
 
 
-    // category route
+    // translate services
     Route::group(["prefix" => "translate/services"], function () {
         Route::get("/", "TranslateServiceController@index")->name("panel.translate.service.index");
         Route::post("create", "TranslateServiceController@create")->name("panel.translate.service.create");
@@ -75,8 +75,19 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
         Route::post("update/state", "TranslateServiceController@updateState")->name("panel.translate.service.state");
         Route::post("get", "TranslateServiceController@get")->name("panel.translate.service.get");
     });
-    //./category end
+    //./translate services end
 
+
+    // services
+    Route::group(["prefix" => "services"], function () {
+        Route::get("/", "ServiceController@index")->name("panel.service.index");
+        Route::post("create", "ServiceController@create")->name("panel.service.create");
+        Route::post("update", "ServiceController@update")->name("panel.service.update");
+        Route::post("delete", "ServiceController@delete")->name("panel.service.delete");
+        Route::post("update/state", "ServiceController@updateState")->name("panel.service.state");
+        Route::post("get", "ServiceController@get")->name("panel.service.get");
+    });
+    //./ services end
 
 
     // currency route
@@ -93,7 +104,7 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
         Route::post("delete", "CurrencyController@delete")
             ->name("panel.currency.delete");
     });
-    //        currency end
+    //currency end
 
 
 
