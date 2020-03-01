@@ -18,5 +18,5 @@ ExpiresDefault "access 1 month"
 </IfModule>
 ## EXPIRES CACHING ##
 <filesMatch ".(css|jpg|jpeg|png|gif|js|ico)$">
-Header set Cache-Control "max-age=2592000, public"
-</filesMatch>   
+Header set Cache-Control "max-age=31536000, public"
+</filesMatch>
