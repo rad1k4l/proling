@@ -11,7 +11,7 @@
             <div class="list-group" id="list-tab" role="tablist">
                 @foreach($services as $k => $service)
                     <a
-                        class="list-group-item list-group-item-action active"
+                        class="list-group-item list-group-item-action {{ $k == 0 ? 'active' : '' }}"
                         data-toggle="list"
                         href="#list-{{ $k + 1 }}"
                         role="tab"
