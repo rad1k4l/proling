@@ -178,9 +178,10 @@
 										</div>
 									</div>
 									<div class="col-lg-8 pt-3">
-										<video class="video-fluid" autoplay loop muted>
-											<source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
-										</video>
+                                        <div class="embed-responsive embed-responsive-16by9">
+                                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/1gbZGoSwpxs" allowfullscreen></iframe>
+                                        </div>
+
 									</div>
 								</div>
 							</div>
@@ -189,57 +190,7 @@
 					</div>
 					<!--/First slide-->
 
-					<!--Second slide-->
-					<div class="carousel-item">
-						<div class="view intro-3">
-							<div class="container">
-								<div class="row pt-lg-5 mt-3">
-									<div class="col-md-12 col-lg-4 pt-lg-5">
-										<div class="video-carousel-text text-center text-lg-left margins">
-											<h1 class="h1-responsive font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">Danışanlar ruhlar</h1>
-											<hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
-											<h6 class="wow fadeInLeft" data-wow-delay="0.3s">TEST-2 MoversGo offers a wide array of moving services just for you and your unique needs. For the past 25 years, we have moved thousands of people to their new homes.</h6>
-											<br>
-											<a href="{{ route('video') }}" class="btn btn-outline-danger btn-rounded waves-effect wow fadeInLeft button-style-2">Read More</a>							
-										</div>
-									</div>
-									<div class="col-lg-8 pt-3">
-										<video class="video-fluid" autoplay loop muted>
-											<source src="https://mdbootstrap.com/img/video/forest.mp4" type="video/mp4" />
-										</video>
-									</div>
-								</div>
-							</div>
 
-						</div>
-					</div>
-					<!--/Second slide-->
-
-					<!--Third slide-->
-					<div class="carousel-item">
-						<div class="view intro-3">
-							<div class="container">
-								<div class="row pt-lg-5 mt-3">
-									<div class="col-md-12 col-lg-4 pt-lg-5">
-										<div class="video-carousel-text text-center text-lg-left margins">
-											<h1 class="h1-responsive font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">EXAMPLE 3</h1>
-											<hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
-											<h6 class="wow fadeInLeft" data-wow-delay="0.3s">TEST-3 MoversGo offers a wide array of moving services just for you and your unique needs. For the past 25 years, we have moved thousands of people to their new homes.</h6>
-											<br>
-											<a href="{{ route('video') }}" class="btn btn-outline-danger btn-rounded waves-effect wow fadeInLeft button-style-2">Read More</a>
-										</div>
-									</div>
-									<div class="col-lg-8 pt-3">
-										<div class="embed-responsive embed-responsive-16by9">
-											<iframe class="embed-responsive-item" src="https://www.youtube.com/embed/v64KOxKVLVg" allowfullscreen></iframe>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-					<!--/Third slide-->
 
 				</div>
 				<!--/.Slides-->
