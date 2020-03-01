@@ -139,7 +139,8 @@
                             let data = response.data.data ;
                             let template = JSON.parse(JSON.stringify(that.modalTemplate));
                             data.translations.forEach(function (value) {
-                                template["service_" + value.locale].data = value.name;
+                                template["title_" + value.locale].data = value.title;
+                                template["text_" + value.locale].data = value.text;
                             });
                             template._title = "Xidmət Redaktə";
                             modal.open(template, function (submitted) {
