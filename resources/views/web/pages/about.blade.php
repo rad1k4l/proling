@@ -57,9 +57,9 @@
                                     </div>
                                 </div>
                                 <div class="col-lg-8 pt-3">
-                                    <video class="video-fluid" autoplay loop muted>
-                                        <source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
-                                    </video>
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/1gbZGoSwpxs" allowfullscreen></iframe>
+                                    </div>
                                 </div>
                             </div>
                         </div>

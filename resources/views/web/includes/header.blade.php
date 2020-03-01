@@ -12,7 +12,7 @@
 			<ul class="navbar-nav">
                 @foreach($categories as $category)
                     <li class="nav-item pl-1">
-                        <a class="nav-link" href="{{ LaravelLocalization::localizeUrl( route($category->route) ) }}" > {{ $category->name }} </a>
+                        <a class="nav-link" href="{{ LaravelLocalization::localizeUrl( route($category['route']) ) }}" > {{ $category['name'] }} </a>
                     </li>
                 @endforeach
 			</ul>

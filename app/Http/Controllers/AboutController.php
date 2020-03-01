@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\About;
+use App\Models\Category;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,10 +18,14 @@ class AboutController extends Controller
      */
     public function index()
     {
-        $about = About::where('type', About::MAIN)->first();
-        $aboutCards = About::where('type', About::CARD)->orderBy('sort', 'desc')->get();
 
-
+        $lang = app()->getLocale();
+        $aboutCards = \Cache::get("about.cards.{$lang}", function () {
+            return About::where('type', About::CARD)->orderBy('sort', 'desc')->get();
+        });
+        $about = \Cache::get("about.{$lang}", function () {
+            return About::where('type', About::MAIN)->first();
+        });
 
         return view('web.pages.about', compact('about', 'aboutCards'));
     }

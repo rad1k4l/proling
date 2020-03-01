@@ -7,7 +7,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale() ], function () {
+Route::group(['prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalization::setLocale(), 'middleware' => 'compress' ], function () {
 
     Route::get('/', ['as' => 'homepage', 'uses' => 'HomeController@index']);
 

@@ -18,8 +18,14 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         ViewFacade::composer(['web.layouts.app'], function(View $view){
-            $categories = Category::orderBy('sort', 'asc')->get();
+
+            $lang = app()->getLocale();
+            $categories = \Cache::get("categories.{$lang}", function () {
+                return Category::orderBy('sort', 'asc')->get()->toArray();
+            });
             $view->with(compact("categories"));
+
+
         });
 
         ViewFacade::composer(['panel.template.sidenav'], function(View $view){
