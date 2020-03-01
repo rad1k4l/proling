@@ -106,5 +106,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="instangle" />
+    <orderEntry type="library" name="pro" level="application" />
   </component>
 </module>

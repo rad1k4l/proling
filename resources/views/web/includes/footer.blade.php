@@ -32,19 +32,19 @@
 	<!--/Footer Links-->
 
 	<!--Copyright-->
-	<div class="footer-copyright text-center py-3 wow fadeIn" data-wow-delay="0.3s">
+	<div class="footer-copyright text-center">
 		<div class="container-fluid">
-			&copy; 2019 Copyright: <a href="{{ route('privacy-policy') }}"> İstifadə qaydaları və Gizlilik siyasəti </a>
+			&copy; {{ date("Y") }} Copyright: <a href="{{ route('privacy-policy') }}"> İstifadə qaydaları və Gizlilik siyasəti </a>
 		</div>
 	</div>
 	<!--/Copyright-->
-	
+
 	<div id="btnTop" class="fixed-action-btn smooth-scroll">
 		<a href="#topSection" class="btn-floating btn-large white">
 			<i class="far fa-angle-up"></i>
 		</a>
 	</div>
-	
+
 
 </footer>
 <!--/Footer-->

@@ -13,11 +13,11 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
 
 	<!-- Font Awesome Pro -->
-	<link href="https://kit-pro.fontawesome.com/releases/latest/css/pro.min.css" rel="stylesheet">
+	<link href="{{ asset('css/pro.min.css') }}" rel="stylesheet">
 	<!-- Font Awesome Free -->
-	<link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="{{ asset("css/font-awesome.min.css") }}">
 	<!--Flag Icons-->
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.4.3/css/flag-icon.css" rel="stylesheet">
+	<link href="{{ asset('css/flag-icon.css') }}" rel="stylesheet">
 	<!-- Bootstrap core CSS -->
 	<link href="{{ asset('web/css/bootstrap.min.css') }}" rel="stylesheet">
 	<!-- Material Design Bootstrap -->
@@ -66,32 +66,32 @@
 	<!--  SCRIPTS  -->
 
 	<!-- JQuery -->
-	<script type="text/javascript" src="{{ asset('web/js/jquery-3.4.1.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
 	<!-- Bootstrap tooltips -->
 	<script type="text/javascript" src="{{ asset('web/js/popper.min.js') }}"></script>
 	<!-- Bootstrap core JavaScript -->
 	<script type="text/javascript" src="{{ asset('web/js/bootstrap.min.js') }}"></script>
 	<!-- MDB core JavaScript -->
 	<script type="text/javascript" src="{{ asset('web/js/mdb.min.js') }}"></script>
-
+    <script src="{{ asset('js/nette.ajax.js') }}"></script>
 	<script>
-		new WOW().init();
+		    new WOW().init();
 
-      // Material Select Initialization
-      $(document).ready(function() {
-      	$('.mdb-select').materialSelect();
-      });
+          // Material Select Initialization
+          $(document).ready(function() {
+            $('.mdb-select').materialSelect();
+          });
 
-      $(window).on("load", function () {
-      	$('#mdb-preloader').fadeOut('slow');
-      });
-
-      $(function () {
-      	$.nette.init();
-      	$('[data-toggle="tooltip"]').tooltip();
-      	$('body').tooltip({ selector: '[data-toggle="tooltip"]' });
-      	$(".button-collapse").sideNav();
-      });
+          $(window).on("load", function () {
+            $('#mdb-preloader').fadeOut('slow');
+          });
+        $(function () {
+            $.nette.init();
+            $('[data-toggle="tooltip"]').tooltip();
+            $('body').tooltip({ selector: '[data-toggle="tooltip"]' });
+            $(".button-collapse").sideNav();
+            console.log('initialized');
+        });
   </script>
 
   @yield('script')

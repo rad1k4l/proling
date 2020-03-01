@@ -1,10 +1,8 @@
-<!--Main Navigation-->
 <header id="topSection">
-	<!--Navbar-->
 	<nav class="navbar navbar-expand-lg navbar-dark navbar-7 fixed-top scrolling-navbar">
 		<div class="container px-0">
 			<a class="navbar-brand" href="{{ route('homepage') }}">
-				<img src="http://placehold.it/150x50?text=Logo" alt="">
+				<img src="https://placehold.it/150x50?text=Logo" alt="Proling az Logo">
 			</a>
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7"
 			aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,22 +10,17 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent-7">
 			<ul class="navbar-nav">
-
                 @foreach($categories as $category)
                     <li class="nav-item pl-1">
                         <a class="nav-link" href="{{ LaravelLocalization::localizeUrl( route($category->route) ) }}" > {{ $category->name }} </a>
                     </li>
-
                 @endforeach
 			</ul>
 
 			<div class="ml-auto text-center">
-				<!--Dropdown primary-->
 				<div class="btn-group mx-3">
-					<!--Trigger-->
 					<a class="nav-link dropdown-toggle" type="button" id="dropdown09" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-{{ app()->getLocale() == 'en' ? 'us' : app()->getLocale() }}"> </span> {{ config('laravellocalization.supportedLocales.'. app()->getLocale() . '.native') }}</a>
-					<!--Menu-->
 					<div class="dropdown-menu">
                         @foreach(config('laravellocalization.supportedLocales') as $code => $locale)
                             @if($code !== app()->getLocale())
@@ -36,11 +29,7 @@
                         @endforeach
 					</div>
 				</div>
-				<!--/Dropdown primary-->
-
-				<!--Dropdown primary-->
 				<div class="btn-group dropleft">
-					<!--Trigger-->
 					<a class="nav-link dropdown-toggle" type="button" id="dropdown09" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false"> <i class="fas fa-phone fa-lg"></i> </a>
 					<!--Menu-->
