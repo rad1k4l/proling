@@ -24,7 +24,7 @@
 					<div class="dropdown-menu">
                         @foreach(config('laravellocalization.supportedLocales') as $code => $locale)
                             @if($code !== app()->getLocale())
-                                <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL($code) }}"><span class="flag-icon flag-icon-{{  $code == 'en' ? 'us' : $code }}"> </span>{{ $locale['native'] }}</a>
+                                <a class="dropdown-item" href="{{ LaravelLocalization::getLocalizedURL($code) }}"><span class="flag-icon flag-icon-{{  $code == 'en' ? 'us' : $code }}"> </span> {{ $locale['native'] }}</a>
 						    @endif
                         @endforeach
 					</div>

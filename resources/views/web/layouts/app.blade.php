@@ -7,15 +7,13 @@
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>ProLing</title>
 
-{{--	<!--Fonts-->--}}
-{{--	<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">--}}
-{{--	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">--}}
-{{--	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">--}}
+	{{--	<!--Fonts-->--}}
+	{{--	<link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">--}}
+	{{--	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">--}}
+	{{--	<link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">--}}
 
 	<!-- Font Awesome Pro -->
-	<link href="{{ asset('css/pro.min.css') }}?v=5" rel="stylesheet" async>
-	<!-- Font Awesome Free -->
-	<link rel="stylesheet" type="text/css" href="{{ asset("css/font-awesome.min.css") }}?v=32" async>
+	<link href="{{ asset('css/all.min.css') }}?v=5" rel="stylesheet" async>
 	<!--Flag Icons-->
 	<link href="{{ asset('css/flag-icon.css') }}" rel="stylesheet" async>
 	<!-- Bootstrap core CSS -->
@@ -36,21 +34,21 @@
 	@include('web.includes.header')
 
 	<!--PreLoader-->
-{{--	<div id="mdb-preloader" class="flex-center">--}}
-{{--		<div class="preloader-wrapper active">--}}
-{{--			<div class="spinner-layer spinner-red-only">--}}
-{{--				<div class="circle-clipper left">--}}
-{{--					<div class="circle"></div>--}}
-{{--				</div>--}}
-{{--				<div class="gap-patch">--}}
-{{--					<div class="circle"></div>--}}
-{{--				</div>--}}
-{{--				<div class="circle-clipper right">--}}
-{{--					<div class="circle"></div>--}}
-{{--				</div>--}}
-{{--			</div>--}}
-{{--		</div>--}}
-{{--	</div>--}}
+	{{--	<div id="mdb-preloader" class="flex-center">--}}
+		{{--		<div class="preloader-wrapper active">--}}
+			{{--			<div class="spinner-layer spinner-red-only">--}}
+				{{--				<div class="circle-clipper left">--}}
+					{{--					<div class="circle"></div>--}}
+				{{--				</div>--}}
+				{{--				<div class="gap-patch">--}}
+					{{--					<div class="circle"></div>--}}
+				{{--				</div>--}}
+				{{--				<div class="circle-clipper right">--}}
+					{{--					<div class="circle"></div>--}}
+				{{--				</div>--}}
+			{{--			</div>--}}
+		{{--		</div>--}}
+	{{--	</div>--}}
 	<!--PreLoader-->
 
 	<!--Main Layout-->
@@ -73,12 +71,12 @@
 	<script defer type="text/javascript" src="{{ asset('web/js/bootstrap.min.js') }}"></script>
 	<!-- MDB core JavaScript -->
 	<script defer type="text/javascript" src="{{ asset('web/js/mdb.min.js') }}"></script>
-    <script defer src="{{ asset('js/nette.ajax.js') }}"></script>
-    <script defer src="{{ asset('js/custom/custom-script.js') }}"></script>
+	<script defer src="{{ asset('js/nette.ajax.js') }}"></script>
+	<script defer src="{{ asset('js/custom/custom-script.js') }}"></script>
 
-    @yield('script')
+	@yield('script')
 
-  <!--  SCRIPTS  -->
+	<!--  SCRIPTS  -->
 
 </body>
 

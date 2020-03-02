@@ -7,7 +7,7 @@
     transition: .3s ease-in 1s;
 }
 
-.intro-3
+/*.intro-3
 {
     background: url("/img/trusted.png") no-repeat center right;
     background-size: auto;
@@ -17,7 +17,7 @@
 {
     background: url("../img/trusted.png") no-repeat center center;
     background-size: cover;
-}
+}*/
 
 .rgba-gradient
 {
