@@ -45,7 +45,8 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
-        return view('panel.login');
+
+        return view('panel.pages.login');
     }
 
 

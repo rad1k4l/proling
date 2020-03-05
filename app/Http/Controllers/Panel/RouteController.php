@@ -16,23 +16,24 @@ class RouteController extends Controller
 {
 
     public function index() {
-        $routes = Routes::menu();
+        $routes = Routes::where('parent', 0)->orderBy('sort','asc')->get();
         return view("panel.route.index", compact('routes'));
     }
 
     public function create(RouteAdd $request) {
         $validated = $request->validated()['submitted'];
-        try {
-            route($validated['route']['data']);
-        }catch (\Exception $exception){
-            return response()->json([
-                'status' => 'err',
-                'info' => "Route not found {$exception->getMessage()}"
-            ]);
-        }
+        if (trim($validated['route']['data']) !== '#')
+            try {
+                route($validated['route']['data']);
+            }catch (\Exception $exception){
+                return response()->json([
+                    'status' => 'err',
+                    'info' => "Route not found {$exception->getMessage()}"
+                ]);
+            }
 
         $route  = new Routes();
-        $route->name = $validated['route']['data'];
+        $route->name = $validated['route']['data'] === '#' ? null : $validated['route']['data'];
         $route->title = $validated['title']['data'];
         $route->sort = 0;
         $route->icon = "home";
@@ -98,6 +99,7 @@ class RouteController extends Controller
             Routes::where("id" , "=" , $id)
                 ->update([
                     "sort" => $k,
+                    'parent' => $pid
                 ]);
             if (isset($cat["children"])){
                 $this->saveState($cat["children"] , $id);

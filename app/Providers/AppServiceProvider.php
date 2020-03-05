@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         ViewFacade::composer(['panel.template.sidenav'], function(View $view){
-            $menus = Routes::menu();
+            $menus = Routes::where('parent', 0)->orderBy('sort','asc')->get();
             $view->with(compact("menus"));
         });
 

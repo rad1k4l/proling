@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Language;
+use App\Models\LanguagePost;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class LanguageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Factory|View
      */
     public function index()
     {
-        return view('web.pages.language');
+        $post = LanguagePost::first();
+        $languages = Language::where('parent', 0)->orderBy('sort' , 'asc')->get();
+
+        return view('web.pages.language', compact('languages','post'));
     }
 
     /**

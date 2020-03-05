@@ -1,7 +1,7 @@
 @extends('panel.app')
 
 @section("title")
-    About Main
+    Dil Mətni
 @endsection
 
 @section("content")
@@ -77,7 +77,7 @@
                                                                             </span>
                                                                         </div>
                                                                         <div v-if="!editor" id="editor_title_{{ $code }}">
-                                                                            {!! $about->translate($code)->title !!}
+                                                                            {!! $language_post->translate($code)->title !!}
                                                                         </div>
                                                                     </div>
                                                                     </p>
@@ -138,7 +138,7 @@
                                                                             </span>
                                                                         </div>
                                                                         <div v-if="!editor" id="editor_body_{{ $code }}">
-                                                                            {!! $about->translate($code)->body !!}
+                                                                            {!! $language_post->translate($code)->content !!}
                                                                         </div>
                                                                     </div>
                                                                 </p>
@@ -186,7 +186,7 @@
 
     <script>
         function checkResponse(response) {
-            return response.status === 200 && response.data.status.toLowerCase() === 'ok';
+            return response.status === 200 && response.data.status && response.data.status.toLowerCase() === 'ok';
         }
         const languages = [
             @foreach(config('laravellocalization.supportedLocales') as $code => $locale)
@@ -207,13 +207,13 @@
             methods: {
                 update() {
                     let t = this;
-                    this.collectBody().then(body => {
+                    this.collectBody().then( (body) => {
                         t.collectTitles().then(titles => {
                             axios.post(
-                                '{{ route('panel.about.update') }}',
+                                '{{ route('panel.language.post.update') }}',
                                 {
                                     title : titles,
-                                    body : body
+                                    content : body
                                 }
                             ).then(response => {
                                 if(checkResponse(response)){

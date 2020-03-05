@@ -3,41 +3,41 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\ApiController;
-use App\Http\Requests\Service\Create;
-use App\Http\Requests\Service\Delete;
-use App\Http\Requests\Service\Update;
-use App\Models\Service;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Language\Create;
+use App\Http\Requests\Language\Delete;
+use App\Http\Requests\Language\Update;
+use App\Models\Language;
 use Illuminate\Http\Request;
 
-class ServiceController extends ApiController
+class LanguageController extends ApiController
 {
-    public function index() {
-        $services = Service::all();
 
-        return view("panel.service.index" , compact('services'));
+    public function index() {
+        $languages = Language::where('parent', 0)->orderBy('sort', 'ASC')->get();
+        return view("panel.language.index" , compact('languages'));
     }
 
     public function create(Create $request){
         $validated = $request->validated()['submitted'];
-        $service = new Service();
+        $language = new Language();
         foreach (config("translatable.locales") as $code) {
-            $service->translateOrNew($code)->title = $validated["title_" . $code]["data"];
-            $service->translateOrNew($code)->text = $validated["text_" . $code]["data"];
+            $language->translateOrNew($code)->name = $validated["name_" . $code]["data"];
         }
-        $service->sort = 0;
-        $service->save();
+        $language->sort = 0;
+        $language->parent = 0;
+        $language->save();
         return $this->responseOk();
     }
 
     public function update(Update $request) {
         $validated = $request->validated();
         $submitted = $validated["submitted"];
-        $service = Service::find($validated['id']);
+        $language = Language::find($validated['id']);
         foreach (config("translatable.locales") as $code) {
-            $service->translateOrNew($code)->title = $submitted["title_" . $code]["data"];
-            $service->translateOrNew($code)->text = $submitted["text_" . $code]["data"];
+            $language->translateOrNew($code)->name = $submitted["name_" . $code]["data"];
         }
-        $service->save();
+        $language->save();
         return response()->json([
             "status" => "OK",
         ]);
@@ -45,33 +45,33 @@ class ServiceController extends ApiController
 
     public function delete(Delete $request){
         $validated = $request->validated();
-        Service::destroy($validated['id']);
+        Language::destroy($validated['id']);
         return response()->json([
             "status" => "OK",
         ]);
     }
 
     public function updateState(Request $request){
-        $categoriesId = $request->validate([
+        $itemsId = $request->validate([
             "data" => ["required"],
         ]);
 
-        $this->saveState($categoriesId['data']);
+        $this->saveState($itemsId['data']);
         return response()->json([
             "status" => "OK"
         ]);
     }
 
     public function saveState($ids , $pid = 0 ){
-        foreach ($ids as $k => $cat) {
-            $id = $cat['id'];
-            Service::where("id" , "=" , $id)
+        foreach ($ids as $k => $item) {
+            $id = $item['id'];
+            Language::where("id" , "=" , $id)
                 ->update([
                     "sort" => $k,
                     "parent" => $pid
                 ]);
-            if (isset($cat["children"])){
-                $this->saveState($cat["children"] , $id);
+            if (isset($item["children"])){
+                $this->saveState($item["children"] , $id);
             }
         }
     }
@@ -80,10 +80,11 @@ class ServiceController extends ApiController
         $validate = $request->validate([
             "id" => "required|integer",
         ]);
-        $service = Service::find($validate['id']);
+        $language = Language::find($validate['id']);
         return response()->json([
             "status" =>"OK",
-            "data" => $service
+            "data" => $language
         ]);
     }
+
 }

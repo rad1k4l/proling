@@ -89,6 +89,28 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
     });
     //./ services end
 
+    // languages
+    Route::group(["prefix" => "languages"], function () {
+        Route::get("/", "LanguageController@index")->name("panel.languages.index");
+        Route::post("create", "LanguageController@create")->name("panel.languages.create");
+        Route::post("update", "LanguageController@update")->name("panel.languages.update");
+        Route::post("delete", "LanguageController@delete")->name("panel.languages.delete");
+        Route::post("update/state", "LanguageController@updateState")->name("panel.languages.state");
+        Route::post("get", "LanguageController@get")->name("panel.languages.get");
+    });
+    //./ languages end
+
+    // language Post route
+    Route::group([ 'prefix' => 'language/post' ], function () {
+        Route::get('index', "LanguagePostController@index")
+            ->name("panel.language.post.index");
+
+        Route::post('update', "LanguagePostController@update")
+            ->name("panel.language.post.update");
+    });
+    //./language Post end
+
+
 
     // currency route
     Route::group(["prefix" => "currency"], function () {
@@ -142,6 +164,9 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
             ->name("panel.about.update");
     });
     //./About end
+
+
+
 
     // About cards route
     Route::group(["prefix" => "about/cards"], function () {

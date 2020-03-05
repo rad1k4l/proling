@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 
 <head>
 	<!-- Required meta tags always come first -->

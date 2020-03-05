@@ -18,8 +18,20 @@ class Routes extends OptimizeModel
             return self::$data;
     }
 
+
+    public function childs() {
+        $childs = $this->where("parent" , "=", $this->id)->get();
+
+        if($childs->isEmpty())
+        {
+            return false;
+        }
+        else return $childs;
+    }
+
+
     private static function _menu(){
-        return self::orderBy('sort', 'asc')->get()->toArray();
+        return self::orderBy('sort', 'asc')->get();
     }
 
 }
