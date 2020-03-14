@@ -38,7 +38,7 @@
                                                                 <div class="collapsible-body">
                                                                     <p>
                                                                         <div  id="snow-container">
-                                                                            <input value="{{ $service->translate($code)->title }}">
+                                                                            <input ref="title_{{ $code }}" value="{{ $service->translate($code)->title }}">
                                                                         </div>
                                                                     </p>
                                                                 </div>
@@ -168,8 +168,13 @@
                     });
                 },
                 titlesFromInputs(){
+                    let t = this;
                     return new Promise(async resolve => {
-                        
+                        let result = {};
+                        await languages.forEach(function (value) {
+                            result[value.code] = t.$refs['title_' + value.code].value;
+                        });
+                        resolve(result);
                     });
                 }
             }
