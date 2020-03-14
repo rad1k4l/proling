@@ -99,14 +99,11 @@
             background-color: #66bb6a !important;
         }
     </style>
-
-
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 @endsection
 
 @section('application_javascript')
 
-    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <script src="{{ asset('js/tinymce.min.js') }}"></script>
 
     @foreach(config('laravellocalization.supportedLocales') as $code => $locale)
@@ -147,16 +144,17 @@
                             ).then(response => {
                                 if(checkResponse(response)){
                                     t.changed = false;
-                                    t.success("Uğurla yeniləndi !")
+                                    t.success("Uğurla yeniləndi !");
                                 }
                             }).catch(error => {
+                                t.success("Xəta baş verdi !!!");
                                 console.log(error);
                             });
                         });
                     });
                 },
                 success(msg){
-                    M.toast({html:msg });
+                    M.toast({ html:msg });
                 },
                 collectBody(){
                     return this.collect("body_editor_");
