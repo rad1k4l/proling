@@ -156,8 +156,11 @@
                 All author rights reserved !
                 <br> Close Source software
                 <br>
-                &copy; {{ date("Y") }} Sofware Copyright <a style="color: black" target="_blank"
-                                                            href="https://www.linkedin.com/in/orxan-zeynall%C4%B1-06a71518b/">Orkhan Zeynalli</a>
+                Software Copyright &copy; {{ date("Y") }}
+                <a style="color: #999"
+                   target="_blank"
+                   href="https://www.linkedin.com/in/orxan-zeynall%C4%B1-06a71518b"
+                > Orkhan Zeynalli </a>
             </div>
         </div>
         <div class="right">

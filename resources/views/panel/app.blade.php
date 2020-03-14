@@ -16,8 +16,6 @@
 
     <link rel="stylesheet" type="text/css" href="/vendors/vendors.min.css">
     <link rel="stylesheet" type="text/css" href="/vendors/animate-css/animate.css">
-    <link rel="stylesheet" type="text/css" href="/vendors/chartist-js/chartist.min.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset("/vendors/chartist-js/chartist-plugin-tooltip.css") }}">
     <!-- END: VENDOR CSS-->
 
     <!-- BEGIN: Page Level CSS-->

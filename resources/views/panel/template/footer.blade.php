@@ -14,10 +14,9 @@
 <script src="/js/vendors.min.js" type="text/javascript"></script>
 <!-- BEGIN VENDOR JS-->
 <!-- BEGIN PAGE VENDOR JS-->
-<script src="/vendors/chartjs/chart.min.js" type="text/javascript"></script>
-<script src="/vendors/chartist-js/chartist.min.js" type="text/javascript"></script>
+
 {{--<script src="/panel/vendors/chartist-js/chartist-plugin-tooltip.js" type="text/javascript"></script>--}}
-<script src="/vendors/chartist-js/chartist-plugin-fill-donut.min.js" type="text/javascript"></script>
+
 <!-- END PAGE VENDOR JS-->
 <!-- BEGIN THEME  JS-->
 <script src="/js/plugins.js" type="text/javascript"></script>
