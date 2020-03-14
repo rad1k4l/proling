@@ -13,7 +13,6 @@ class ServiceController extends ApiController
 {
     public function index() {
         $services = Service::all();
-
         return view("panel.service.index" , compact('services'));
     }
 
@@ -22,20 +21,27 @@ class ServiceController extends ApiController
         $service = new Service();
         foreach (config("translatable.locales") as $code) {
             $service->translateOrNew($code)->title = $validated["title_" . $code]["data"];
-            $service->translateOrNew($code)->text = $validated["text_" . $code]["data"];
         }
         $service->sort = 0;
         $service->save();
         return $this->responseOk();
     }
 
-    public function update(Update $request) {
+    public function updateForm(int $id) {
+        $service = Service::find($id);
+
+        // abort the request
+        if (!$service) abort(404, 'Service not found');
+
+        return view('panel.service.edit', compact('service'));
+    }
+
+    public function update(Update $request, $id) {
         $validated = $request->validated();
-        $submitted = $validated["submitted"];
-        $service = Service::find($validated['id']);
+        $service = Service::find($id);
         foreach (config("translatable.locales") as $code) {
-            $service->translateOrNew($code)->title = $submitted["title_" . $code]["data"];
-            $service->translateOrNew($code)->text = $submitted["text_" . $code]["data"];
+            $service->translateOrNew($code)->title = $validated["title"][$code];
+            $service->translateOrNew($code)->text = $validated["body"][$code];
         }
         $service->save();
         return response()->json([

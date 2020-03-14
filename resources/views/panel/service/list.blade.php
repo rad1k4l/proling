@@ -4,8 +4,10 @@
                 <div class="dd-handle dd3-handle"></div>
                 <div  class="dd3-content" style="cursor: pointer">
                     <div class="row">
-                        <div class="col s4" @click.prevent ="edit({{ $service->id }})">
-                            {{ $service->title }}
+                        <div class="col s4"  >
+                            <a href="{{ route('panel.service.update.form', ['id' => $service->id]) }}">
+                                {{ $service->title }}
+                            </a>
                         </div>
                         <div class="col s4 right-align-lg">
                             <span  @click.prevent ="del({{ $service->id }})" style="color: red;">X</span>

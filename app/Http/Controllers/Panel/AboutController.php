@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Panel;
 
 use App\Http\Controllers\ApiController;
-use App\Http\Controllers\Controller;
+
 use App\Http\Requests\About\Store;
 use App\Models\About;
-use Facade\FlareClient\Api;
-use Illuminate\Http\Request;
 
 class AboutController extends ApiController
 {

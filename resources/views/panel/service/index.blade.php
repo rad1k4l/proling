@@ -42,7 +42,7 @@
                                                     <a  @click.prevent="save" class="btn waves-effect waves-teal">Save</a>
                                                 </div>
                                                 <div class="col s6">
-                                                    <a  @click.prevent="add" class="btn waves-effect waves-teal">New </a>
+                                                    <a  @click.prevent="add" class="btn waves-effect waves-teal">New</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -62,8 +62,8 @@
 
 @section("application_javascript")
 
-    <link rel="stylesheet" type="text/css" href="https://pixinvent.com/materialize-material-design-admin-template/app-assets/vendors/jquery.nestable/nestable.css">
-    <script src="https://pixinvent.com/materialize-material-design-admin-template/app-assets/vendors/jquery.nestable/jquery.nestable.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/nestable.css') }}">
+    <script src="{{ asset('js/jquery.nestable.js') }}"></script>
 
     @include("clibs.input-modal")
     <script>
@@ -85,14 +85,6 @@
                                 type : "text",
                            {{  "}," }}
                    @endforeach
-                   @foreach(config("laravellocalization.supportedLocales") as $code => $lang )
-                        {{ "text_".$code . ":"  }}
-                            {{ "{" }}
-                                data : "",
-                                label : "Xidmət mətni " + "{{ $lang['native'] }}",
-                                type : "text",
-                            {{  "}," }}
-                    @endforeach
 
                 }
             },
@@ -131,39 +123,7 @@
                         });
                     });
                 },
-                edit: function (id) {
-                    axios.post("{{ route("panel.service.get") }}", { id : id}).then(response => {
-                        let that = this;
 
-                        if (checkResponse(response)) {
-                            let data = response.data.data ;
-                            let template = JSON.parse(JSON.stringify(that.modalTemplate));
-                            data.translations.forEach(function (value) {
-                                template["title_" + value.locale].data = value.title;
-                                template["text_" + value.locale].data = value.text;
-                            });
-                            template._title = "Xidmət Redaktə";
-                            modal.open(template, function (submitted) {
-                                return new Promise(resolve => {
-                                    axios.post("{{ route("panel.service.update") }}",{
-                                        id : id ,
-                                        submitted
-                                    }).then(response => {
-                                        if(checkResponse(response)){
-                                            window.location.reload();
-                                            return true;
-                                        }else {
-                                            resolve(response.data.info);
-                                        }
-                                    }).catch(error => {
-                                       resolve(error.message);
-                                    });
-                                });
-                            });
-                        }
-
-                    }).catch();
-                },
                 del : function  (id) {
                     let that = this;
                     swal({

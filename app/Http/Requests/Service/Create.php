@@ -25,7 +25,6 @@ class Create extends FormRequest
     {
         $rules = [];
         foreach (config("app.locales") as $code => $name) {
-            $rules["submitted.text_" . $name . ".data" ] = [ "required", "string" ];
             $rules["submitted.title_" . $name . ".data" ] = [ "required", "string" ];
 
         }

@@ -23,12 +23,14 @@ class Update extends FormRequest
      */
     public function rules()
     {
+
         $rules = [];
-        foreach (config("app.locales") as $code => $name) {
-            $rules["submitted.title_" . $name . ".data" ] = [ "required", "string" ];
-            $rules["submitted.text_" . $name . ".data" ] = [ "required", "string" ];
+
+        foreach (config('laravellocalization.supportedLocales') as $code => $locale) {
+            $rules['title.' . $code] = [ 'required', 'string' ];
+            $rules['body.' . $code] = ['required', 'string' ];
         }
-        $rules['id'] = ['required', 'int'];
-        return $rules;
+
+        return  $rules;
     }
 }

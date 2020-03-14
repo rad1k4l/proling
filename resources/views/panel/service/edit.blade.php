@@ -1,7 +1,7 @@
 @extends('panel.app')
 
 @section("title")
-    About Main
+    Xidmət Yeniləməsi
 @endsection
 
 @section("content")
@@ -34,14 +34,12 @@
                                                     <ul class="collapsible collapsible-accordion">
                                                         @foreach(config('laravellocalization.supportedLocales') as $code => $locale)
                                                             <li>
-                                                                <div class="collapsible-header"><i class="material-icons">flag</i> Tittle {{ $locale['native'] }}</div>
+                                                                <div class="collapsible-header"><i class="material-icons">language</i>Xidmət adı {{ $locale['native'] }}</div>
                                                                 <div class="collapsible-body">
                                                                     <p>
-                                                                    <div  id="snow-container">
-                                                                        <textarea cols="1" id="title_editor_{{ $code }}">
-                                                                            {!! $about->translate($code)->title !!}
-                                                                        </textarea>
-                                                                    </div>
+                                                                        <div  id="snow-container">
+                                                                            <input value="{{ $service->translate($code)->title }}">
+                                                                        </div>
                                                                     </p>
                                                                 </div>
                                                             </li>
@@ -55,20 +53,20 @@
                                             </div>
                                             <div class="col s12">
                                                 <ul class="collapsible collapsible-accordion">
-                                                   @foreach(config('laravellocalization.supportedLocales') as $code => $locale)
+                                                    @foreach(config('laravellocalization.supportedLocales') as $code => $locale)
                                                         <li>
-                                                            <div class="collapsible-header"><i class="material-icons">flag</i> About {{ $locale['native'] }}</div>
+                                                            <div class="collapsible-header"><i class="material-icons">language</i> Mətn {{ $locale['native'] }}</div>
                                                             <div class="collapsible-body">
                                                                 <p>
-                                                                    <div  id="snow-container">
+                                                                <div  id="snow-container">
                                                                         <textarea id="body_editor_{{ $code }}">
-                                                                            {!! $about->translate($code)->body !!}
+                                                                            {!! $service->translate($code)->text !!}
                                                                         </textarea>
-                                                                    </div>
+                                                                </div>
                                                                 </p>
                                                             </div>
                                                         </li>
-                                                   @endforeach
+                                                    @endforeach
                                                 </ul>
                                             </div>
                                         </div>
@@ -106,7 +104,6 @@
     <script src="{{ asset('js/tinymce.min.js') }}"></script>
 
     @foreach(config('laravellocalization.supportedLocales') as $code => $locale)
-        @include('clibs.tinymce', [ 'selector' => '#title_editor_'. $code ])
         @include('clibs.tinymce', [ 'selector' => '#body_editor_'. $code ])
     @endforeach
     <script>
@@ -115,13 +112,13 @@
         }
         const languages = [
             @foreach(config('laravellocalization.supportedLocales') as $code => $locale)
-                {!! "{
-                       code : '{$code}',
-                       native : '{$locale['native']}'
-                    }," !!}
+            {!! "{
+                   code : '{$code}',
+                   native : '{$locale['native']}'
+                }," !!}
             @endforeach
         ];
-        const about = new Vue({
+        new Vue({
             el: "#about-app",
             data: {
                 title: "",
@@ -135,7 +132,7 @@
                     this.collectBody().then(body => {
                         t.collectTitles().then(titles => {
                             axios.post(
-                                '{{ route('panel.about.update') }}',
+                                '{{ route('panel.service.update',[ 'id' => $service->id]) }}',
                                 {
                                     title : titles,
                                     body : body
@@ -159,7 +156,7 @@
                     return this.collect("body_editor_");
                 },
                 collectTitles(){
-                    return this.collect('title_editor_');
+                    return this.titlesFromInputs();
                 },
                 collect(prefix){
                     return new Promise(async resolve => {
@@ -168,6 +165,11 @@
                             result[value.code] = tinymce.get(`${prefix}${value.code}`).getContent();
                         });
                         resolve(result);
+                    });
+                },
+                titlesFromInputs(){
+                    return new Promise(async resolve => {
+                        
                     });
                 }
             }
