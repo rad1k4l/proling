@@ -33,7 +33,7 @@
                         @foreach($child as $k => $item)
                             <li class="{{ $item['name'] == request()->route()->getName()  ? "active" : "" }}">
                                 <a class="{{ $item['name'] == request()->route()->getName()  ? "active" : "" }}" href="{{ route($item['name']) }}">
-                                    <i class="material-icons">radio_button_unchecked</i>
+                                    <i class="material-icons">radio_button_{{ $item['name'] == request()->route()->getName()  ? "checked" : "unchecked" }}</i>
                                     <span>{{ $item['title'] }}</span>
                                 </a>
                             </li>
