@@ -48,21 +48,23 @@ class RouteController extends Controller
         $validated = $request->validated();
         $submitted = $validated["submitted"];
         $route = Routes::find($validated['id']);
-        try {
-            route($submitted['route']['data']);
-        }catch (\Exception $exception){
-            return response()->json([
-                'status' => 'err',
-                'info' => "Route not found"
-            ]);
-        }
+        if (trim($submitted['route']['data']) !== '#')
+            try {
+                route($submitted['route']['data']);
+            }catch (\Exception $exception){
+                return response()->json([
+                    'status' => 'err',
+                    'info' => "Route not found {$exception->getMessage()}"
+                ]);
+            }
+
         if (!$route){
             return response()->json([
                 'status' => 'err',
                 'info' => "Route not found"
             ]);
         }
-        $route->name = $submitted['route']['data'];
+        $route->name = $submitted['route']['data'] === '#' ? null : $submitted['route']['data'];
         $route->title = $submitted['title']['data'];
         $route->save();
         return response()->json([
@@ -112,11 +114,11 @@ class RouteController extends Controller
             "id" => "required|integer",
         ]);
 
-        $category = Routes::find($validate['id']);
-
+        $route = Routes::find($validate['id']);
+        if (!$route->name) $route->name = "#";
         return response()->json([
             "status" =>"OK",
-            "data" => $category
+            "data" => $route
         ]);
     }
 }
