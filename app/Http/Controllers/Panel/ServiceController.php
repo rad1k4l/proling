@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 class ServiceController extends ApiController
 {
     public function index() {
-        $services = Service::all();
+        $services = Service::orderBy('sort', 'ASC')->get();
         return view("panel.service.index" , compact('services'));
     }
 

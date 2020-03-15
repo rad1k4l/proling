@@ -82,8 +82,8 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
     Route::group(["prefix" => "services"], function () {
         Route::get("/", "ServiceController@index")->name("panel.service.index");
         Route::post("create", "ServiceController@create")->name("panel.service.create");
-        Route::get("update/{id}", "ServiceController@updateForm")->name("panel.service.update.form");
-        Route::post("update/{id}", "ServiceController@update")->name("panel.service.update");
+        Route::get("forms/update/{id}", "ServiceController@updateForm")->name("panel.service.update.form");
+        Route::post("actions/update/{id}", "ServiceController@update")->name("panel.service.update");
 
         Route::post("delete", "ServiceController@delete")->name("panel.service.delete");
         Route::post("update/state", "ServiceController@updateState")->name("panel.service.state");

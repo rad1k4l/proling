@@ -68,7 +68,7 @@
     @include("clibs.input-modal")
     <script>
         function checkResponse(response){
-            return response.status === 200 && response.data.status.toLowerCase() === 'ok';
+            return response.status === 200 && response.data.status &&  response.data.status.toLowerCase() === 'ok';
         }
 
         let categories = new Vue({
@@ -100,7 +100,7 @@
                             if(checkResponse(response)) {
                                 window.location.reload();
                             }
-                        }).catch();
+                        });
                     }
                 },
                 add: function () {
