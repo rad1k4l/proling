@@ -1,6 +1,6 @@
 <script>
 
-    var editor_config = {
+    editor_config = {
         path_absolute : "/",
         selector: "textarea{{ $selector ?? "tinymce" }}",
         plugins: [

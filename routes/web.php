@@ -91,6 +91,18 @@ Route::group([ 'middleware' => "auth", 'namespace' => 'Panel' , 'prefix' => 'pan
     });
     //./ services end
 
+    // VideoPage
+        Route::group(["prefix" => "video/page"], function () {
+            Route::get("/", "VideoPageController@index")->name("panel.video.page.index");
+            Route::post("create", "VideoPageController@create")->name("panel.video.page.create");
+            Route::get("forms/update/{id}", "VideoPageController@updateForm")->name("panel.video.page.update.form");
+            Route::post("actions/update/{id}", "VideoPageController@update")->name("panel.video.page.update");
+            Route::post("delete", "VideoPageController@delete")->name("panel.video.page.delete");
+            Route::post("update/state", "VideoPageController@updateState")->name("panel.video.page.state");
+            Route::post("get", "VideoPageController@get")->name("panel.video.page.get");
+        });
+    //./ VideoPage end
+
     // languages
     Route::group(["prefix" => "languages"], function () {
         Route::get("/", "LanguageController@index")->name("panel.languages.index");
