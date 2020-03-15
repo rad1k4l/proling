@@ -27,7 +27,7 @@
                 </div>
                 @foreach($services as $k => $service )
                     <div class="tab-pane fade {{ $k == 0 ? 'show active' : '' }}" id="list-{{ $k+1 }}" role="tabpanel">
-                        {{ $service->text }}
+                        {!! $service->text !!}
                     </div>
                 @endforeach
 
