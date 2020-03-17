@@ -2,18 +2,37 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\VideoPage;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class VideoPageController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @param string $slug
+     * @return mixed
      */
-    public function index()
+    public function index(int $id, string $slug)
     {
-        return view('web.pages.videopage');
+
+        $videopage = VideoPage::findOrFail($id);
+        $dslug = Str::slug($videopage->title);
+
+        if ( $dslug !== $slug) {
+            return redirect()->route('video', [
+                'id' => $id,
+                'slug' => $dslug
+            ], 301);
+        }
+
+
+
+        return view('web.pages.videopage', compact('videopage'));
     }
 
     /**

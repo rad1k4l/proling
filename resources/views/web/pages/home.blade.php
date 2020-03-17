@@ -163,36 +163,34 @@
 			<div id="carousel-example-2z" class="carousel slide carousel-fade" data-ride="carousel">
 				<!--Slides-->
 				<div class="carousel-inner" role="listbox">
-					<!--First slide-->
-					<div class="carousel-item active">
-						<div class="view intro-3">
-							<div class="container">
-								<div class="row pt-lg-5 mt-3">
-									<div class="col-md-12 col-lg-4 pt-lg-5">
-										<div class="video-carousel-text text-center text-lg-left margins">
-											<h1 class="h1-responsive font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">Ermənistan və Azərbaycanın qadağan olunmuş tarixi</h1>
-											<hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
-											<h6 class="wow fadeInLeft" data-wow-delay="0.3s">TEST-1 MoversGo offers a wide array of moving services just for you and your unique needs. For the past 25 years, we have moved thousands of people to their new homes.</h6>
-											<br>
-											<a href="{{ route('video') }}" class="btn btn-outline-danger btn-rounded waves-effect wow fadeInLeft button-style-2">Read More</a>
-										</div>
-									</div>
-									<div class="col-lg-8 pt-3">
-                                        <div class="embed-responsive embed-responsive-16by9">
-                                            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/1gbZGoSwpxs" allowfullscreen></iframe>
+
+					@foreach($videopages as $k =>  $videopage)
+                        <div class="carousel-item {{ $k == 0 ? 'active' : '' }}">
+                            <div class="view intro-3">
+                                <div class="container">
+                                    <div class="row pt-lg-5 mt-3">
+                                        <div class="col-md-12 col-lg-4 pt-lg-5">
+                                            <div class="video-carousel-text text-center text-lg-left margins">
+                                                <h1 class="h1-responsive font-weight-bold wow fadeInLeft" data-wow-delay="0.3s">{{ $videopage->title }}</h1>
+                                                <hr class="hr-light wow fadeInLeft" data-wow-delay="0.3s">
+                                                <h6 class="wow fadeInLeft" data-wow-delay="0.3s">{{ $videopage->short_title }}</h6>
+                                                <br>
+                                                <a href="{{ route('video', ['id' => $videopage->id, 'slug' => \Illuminate\Support\Str::slug($videopage->title) ]) }}" class="btn btn-outline-danger btn-rounded waves-effect wow fadeInLeft button-style-2">Read More</a>
+                                            </div>
                                         </div>
+                                        <div class="col-lg-8 pt-3">
+                                            <div class="embed-responsive embed-responsive-16by9">
+                                                {!! $videopage->youtube_embed !!}
+                                            </div>
 
-									</div>
-								</div>
-							</div>
+                                        </div>
+                                    </div>
+                                </div>
 
-						</div>
-					</div>
-					<!--/First slide-->
-
-
-
-				</div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
 				<!--/.Slides-->
 
 				<!--Controls-->

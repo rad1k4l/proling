@@ -27,7 +27,7 @@ Route::group(['prefix' => \Mcamara\LaravelLocalization\Facades\LaravelLocalizati
 
     Route::get('/contact', ['as' => 'contact', 'uses' => 'ContactController@index']);
 
-    Route::get('/video', ['as' => 'video', 'uses' => 'VideoPageController@index']);
+    Route::get('/video/{id}/{slug}', ['as' => 'video', 'uses' => 'VideoPageController@index']);
 
     Route::get('/privacy-policy', ['as' => 'privacy-policy', 'uses' => 'PrivacyPolicyController@index']);
 
